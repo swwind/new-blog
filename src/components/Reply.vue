@@ -4,11 +4,12 @@
     div.content
       ul.replies-list(v-if="replies && replies.length !== 0")
         li(v-for="reply in replyTree", v-bind:style="{ marginLeft: reply.depth * 56 + 'px' }", v-if="!reply.deleted")
-          div.avatar
+          a.avatar(v-bind:href="reply.site || false", target="view_window")
+            div.gravatar-avatar(v-if="reply.gravatar", v-bind:style="{ backgroundImage: `url(https://gravatar.loli.net/avatar/${reply.gravatar}?d=mm&s=40)` }")
             div.github-avatar(v-if="reply.githubId", v-bind:style="{ backgroundImage: `url(https://github.com/${reply.githubId}.png)` }")
             div.fallback-avatar {{ reply.user.trim().substr(0, 1).toUpperCase() }}
           div.reply-body
-            div.name {{ reply.user }} {{ reply.site !== '' ? `from ${reply.site}` : ''}}
+            a.name(v-bind:href="reply.site || false", target="view_window") {{ reply.user }}
             div.date {{ timeToString(reply.datetime) }}
             div(v-html="reply.content" v-if="reply.markdown")
             div.raw-content(v-else) {{ reply.content }}
@@ -21,14 +22,14 @@
             th 姓名
             td: input.full(v-model="name", placeholder="必填")
           tr
-            th GitHub ID
-            td: input.full(v-model="githubId", placeholder="选填，填写后可以显示头像")
-          tr
             th 站点
             td: input.full(v-model="site", placeholder="选填")
           tr
             th 电子邮件
-            td: input.full(v-model="email", placeholder="选填，邮件地址不会公开")
+            td: input.full(v-model="email", placeholder="选填，不会公开，用于显示 gravatar 头像")
+          tr
+            th GitHub ID
+            td: input.full(v-model="githubId", placeholder="选填，如果没有 gravatar 则使用 github 头像代替")
           tr
             th 评论
             td: textarea.content(v-model="content", placeholder="必填，可以使用 Markdown 语法")
@@ -42,6 +43,7 @@
 <script>
 import timeToString from '../utils/timeToString';
 import api from '../api';
+import md5 from 'md5';
 
 function ReplyNode (value) {
   this.value = value;
@@ -141,6 +143,7 @@ export default {
         content: this.content,
         replyTo: this.replyTo,
         githubId: this.githubId,
+        gravatar: this.email ? md5(this.email) : '',
       };
 
       if (!data.user) {
@@ -240,12 +243,12 @@ div.reply {
         }
       }
 
-      div.avatar, div.github-avatar {
+      a.avatar, div.github-avatar, div.gravatar-avatar {
         width: 40px;
         height: 40px;
       }
 
-      div.avatar {
+      a.avatar {
         flex-grow: 0;
         flex-shrink: 0;
         border-radius: 20px;
@@ -253,10 +256,19 @@ div.reply {
         margin-top: 5px;
         margin-right: 1em;
         position: relative;
+        border-bottom: none;
+        &:not([href]) {
+          cursor: default;
+        }
       }
 
-      div.github-avatar, div.fallback-avatar {
+      div.github-avatar, div.fallback-avatar, div.gravatar-avatar {
         position: absolute;
+      }
+
+      div.gravatar-avatar {
+        z-index: 3;
+        background-size: cover;
       }
 
       div.github-avatar {
@@ -284,10 +296,16 @@ div.reply {
       }
     }
 
-    div.name {
+    a.name {
       font-weight: bold;
+      &:not([href]) {
+        cursor: default;
+        &:hover {
+          border-bottom: none;
+        }
+      }
     }
-    div.date, div.name {
+    div.date, a.name {
       font-size: 0.8em;
       color: grey;
     }

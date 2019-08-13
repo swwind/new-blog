@@ -218,6 +218,7 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
         content: req.body.content,
         replyTo: req.body.replyTo,
         githubId: req.body.githubId,
+        gravatar: req.body.gravatar,
         datetime: new Date().getTime()
       }}}
     );
