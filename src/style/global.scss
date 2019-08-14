@@ -46,7 +46,7 @@ button:focus, .button:focus {
 
 article {
   p {
-    white-space: pre;
+    white-space: pre-line;
   }
 
   img,
@@ -122,13 +122,17 @@ pre {
   border-radius: 2px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; // iOS
-  counter-reset: line;  
+  counter-reset: line;
+  
+  code {
+    font-size: 1.2em;
+  }
 }
 
 code {
   display: inline-block;
   border-radius: 0.2em;
-  font-size: 1.2em;
+  font-size: 0.9em;
   padding: 0.1em 0.2em;
   background: rgb(245, 245, 245);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;

@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import 'regenerator-runtime';
+
 import App from './App.vue';
 import { createRouter, coreComponents } from './router';
 import { createStore } from './store';
