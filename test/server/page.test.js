@@ -4,8 +4,8 @@ const supertest = require('supertest');
 const expect = require('chai').expect;
 const fakeId = '59423e06ed4418798379a5e7';
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
+const token = require('../../utils').token;
 
 describe('Testing page-related APIs.', () => {
   const pageTemplate = {
@@ -21,7 +21,7 @@ describe('Testing page-related APIs.', () => {
     email: 'bar@foo.baz',
     site: 'localhost.localdomain',
     content: 'Fork you!',
-    datetime: new Date().getTime(),
+    datetime: new Date().getTime()
   };
   let pages;
   let id;
@@ -106,7 +106,7 @@ describe('Testing page-related APIs.', () => {
 
     expect(response.body.status).equal('error');
   });
-  
+
   it('Update a page with invalid token', async () => {
     pageTemplate.content.content = 'foobar';
     const url = '/api/page/by-id/233666';
@@ -117,7 +117,7 @@ describe('Testing page-related APIs.', () => {
 
     expect(response.body.status).equal('error');
   });
-  
+
   it('Update the new page', async () => {
     pageTemplate.content.content = 'foobar';
     const url = `/api/page/by-id/${id}?token=${token}`;
@@ -158,21 +158,21 @@ describe('Testing page-related APIs.', () => {
 
     expect(response.body.status).equal('error');
   });
-  
+
   it('Delete the new page without token', async () => {
     const url = `/api/page/by-id/${id}`;
     const response = await agent.delete(url).expect(403);
 
     expect(response.body.status).equal('error');
   });
-  
+
   it('Delete the new page with valid token', async () => {
     const url = `/api/page/by-id/${id}?token=${token}`;
     const response = await agent.delete(url).expect(200);
 
     expect(response.body.status).to.be.ok;
   });
-  
+
   it('Check if page was deleted', async () => {
     const url = '/api/page';
     const response = await agent.get(url).expect(200);
@@ -180,5 +180,4 @@ describe('Testing page-related APIs.', () => {
     expect(response.body.status).to.be.ok;
     expect(response.body.pages.length).to.be.equals(pages.length);
   });
-
 });

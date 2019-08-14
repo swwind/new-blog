@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/global.scss';
+@import '../style/color.scss';
 
 div.side-bar {
   /* Mobile devices */

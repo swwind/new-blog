@@ -30,7 +30,7 @@ export default {
     };
   },
   watch: {
-    '$route': function () {
+    $route: function () {
       this.loadPosts(this.$route.params.page || 1);
     }
   },
@@ -56,7 +56,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../style/global.scss';
 
 .posts-list {
   .container {

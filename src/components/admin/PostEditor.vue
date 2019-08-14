@@ -14,7 +14,7 @@
           input(v-else v-model="category")
       tr
         td.label 标签：
-        td: span(v-for="(tag, idx) in arraylize(tags)" @click="deleteTag(tag)") {{ '#' + tag }} 
+        td: span(v-for="(tag, idx) in arraylize(tags)" @click="deleteTag(tag)") {{ '#' + tag }}
       tr
         td.label 常用标签：
         td
@@ -22,7 +22,7 @@
           button.tag(@click="addTag(prompt('新标签叫啥呢？'))") +
       tr
         td.label 封面图片：
-        td: input.full(v-model="cover") 
+        td: input.full(v-model="cover")
       tr
         td.label 日期：
         td
@@ -31,7 +31,7 @@
           input.short(v-model="date.month")
           | 月
           input.short(v-model="date.day")
-          | 日　
+          | 日
           input.short(v-model="date.hour")
           | 时
           input.short(v-model="date.minute")
@@ -89,7 +89,7 @@ export default {
   name: 'PostEditor',
   mixins: [preventLeaveMixin],
   data () {
-    let date = new Date();
+    const date = new Date();
     return {
       id: '',
       slug: '',
@@ -110,7 +110,7 @@ export default {
       tag: '',
       cover: '',
       body: [],
-      editingLanguage: '',
+      editingLanguage: ''
     };
   },
   computed: {
@@ -129,12 +129,12 @@ export default {
           content: '',
           format: '',
           language: result,
-          default: false,
+          default: false
         });
         this.editingLanguage = result;
       }
     },
-    '$route': function () {
+    $route: function () {
       const initialData = this.$options.data();
       for (const key of Object.keys(initialData)) {
         if (key === 'editingLanguage') {
@@ -196,8 +196,8 @@ export default {
           hideOnIndex: this.hideOnIndex,
           insertCover: this.insertCover,
           password: this.password,
-          body: this.body,
-        },
+          body: this.body
+        }
       }).then(() => {
         alert('文章已更新');
         this.fetchPost(true);
@@ -206,7 +206,7 @@ export default {
         alert('会话过期，请手动刷新');
       });
     },
-    createPost() {
+    createPost () {
       if (!this.slug) {
         alert('URL 名称是必须的！');
         return;
@@ -222,12 +222,12 @@ export default {
           hideOnIndex: this.hideOnIndex,
           insertCover: this.insertCover,
           password: this.password,
-          body: this.body,
-        },
+          body: this.body
+        }
       }).then(res => {
         alert('文章已创建。');
         this.$router.push(`/admin/post/edit/${res.id}`);
-      }).catch(e => {
+      }).catch(() => {
         alert('会话过期，请手动刷新');
       });
     },
@@ -248,17 +248,18 @@ export default {
           try {
             this.editingLanguage = this.body.filter(body => body.default)[0].language;
           } catch (_) {
+            // do nothing
           }
         });
 
-        let tmpDate = new Date(post.date);
+        const tmpDate = new Date(post.date);
         this.date = {
           year: tmpDate.getFullYear(),
           month: tmpDate.getMonth() + 1,
           day: tmpDate.getDate(),
           hour: tmpDate.getHours(),
           minute: tmpDate.getMinutes(),
-          second: tmpDate.getSeconds(),
+          second: tmpDate.getSeconds()
         };
       });
     },
@@ -274,11 +275,11 @@ export default {
       }
       api.post.deletePostById({ id: this.$route.params.id, token: this.$store.state.token }).then(() => {
         this.back();
-      }).catch(e => {
+      }).catch(() => {
         alert('会话过期，请手动刷新');
       });
     }
-  },
+  }
 };
 
 </script>

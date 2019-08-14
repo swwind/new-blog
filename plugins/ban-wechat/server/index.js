@@ -1,8 +1,3 @@
-const pug = require('pug');
-const path = require('path');
-const fs = require('fs');
-const express = require('express');
-
 const template = `<html>
 <head>
   <title>抱歉，出错了</title>

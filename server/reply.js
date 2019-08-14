@@ -1,7 +1,7 @@
 const express = require('express');
 const utils = require('../utils');
 
-let router = express.Router();
+const router = express.Router();
 
 /**
  * Get lastest five replies
@@ -11,21 +11,21 @@ router.get('/latest', async (req, res) => {
 
   try {
     postReplies = await utils.db.conn.collection('posts').aggregate([
-      { $project: { slug: 1, body: 1, 'replies.datetime': 1, 'replies.user': 1, 'replies.deleted': 1 }},
+      { $project: { slug: 1, body: 1, 'replies.datetime': 1, 'replies.user': 1, 'replies.deleted': 1 } },
       { $unwind: '$replies' },
       { $match: { 'replies.deleted': { $ne: true } } },
-      { $sort: { 'replies.datetime': -1 }},
-      { $addFields: { path: 'post' }},
+      { $sort: { 'replies.datetime': -1 } },
+      { $addFields: { path: 'post' } },
       { $limit: 5 }
     ]).toArray();
     postReplies = utils.render(postReplies, { fakeRendering: true });
 
     pageReplies = await utils.db.conn.collection('pages').aggregate([
-      { $project: { slug: 1, title: 1, 'replies.datetime': 1, 'replies.user': 1, 'replies.deleted': 1 }},
+      { $project: { slug: 1, title: 1, 'replies.datetime': 1, 'replies.user': 1, 'replies.deleted': 1 } },
       { $unwind: '$replies' },
       { $match: { 'replies.deleted': { $ne: true } } },
-      { $sort: { 'replies.datetime': -1 }},
-      { $addFields: { path: 'page' }},
+      { $sort: { 'replies.datetime': -1 } },
+      { $addFields: { path: 'page' } },
       { $limit: 5 }
     ]).toArray();
   } catch (e) {
@@ -38,7 +38,7 @@ router.get('/latest', async (req, res) => {
     });
   }
 
-  let replies = [...postReplies, ...pageReplies];
+  const replies = [...postReplies, ...pageReplies];
   replies.sort((a, b) => b.replies.datetime - a.replies.datetime);
 
   return res.send({

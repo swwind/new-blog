@@ -10,13 +10,12 @@ export default {
   data () {
     return {
       title: config.title,
-      subtitle: config.subtitle,
+      subtitle: config.subtitle
     };
   }
 };
 </script>
 
 <style lang="scss">
-
 
 </style>

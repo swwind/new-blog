@@ -1,35 +1,47 @@
-const child_process = require('child_process');
+const { spawn, exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
 function getCurrentCommitHash () {
-  return new Promise((resolve) => {
-    child_process.exec('git rev-parse HEAD', (err, stdout) => {
-      resolve(stdout.trim());
+  return new Promise((resolve, reject) => {
+    exec('git rev-parse HEAD', (err, stdout) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(stdout.trim());
+      }
     });
   });
 }
 
 function evalGitPull () {
-  return new Promise((resolve) => {
-    child_process.exec('git pull', (err, stdout) => {
-      resolve(stdout.trim());
+  return new Promise((resolve, reject) => {
+    exec('git pull', (err, stdout) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(stdout.trim());
+      }
     });
   });
 }
 
 function getCommitSinceHash (hash) {
-  return new Promise((resolve) => {
-    child_process.exec(`git rev-list ${hash}..HEAD`, (err, stdout) => {
-      resolve(stdout.split('\n'));
+  return new Promise((resolve, reject) => {
+    exec(`git rev-list ${hash}..HEAD`, (err, stdout) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(stdout.split('\n'));
+      }
     });
   });
 }
 
 function evalBuildBundle () {
   return new Promise((resolve) => {
-    const cp = child_process.spawn('npm', ['run', 'build'], {
-      stdio: 'inherit',
+    const cp = spawn('npm', ['run', 'build'], {
+      stdio: 'inherit'
     });
     cp.on('close', (code) => {
       resolve();
@@ -46,7 +58,7 @@ async function main () {
 
   const hashs = [
     currentCommitHash,
-    ...await getCommitSinceHash(currentCommitHash),
+    ...await getCommitSinceHash(currentCommitHash)
   ];
 
   console.log(hashs);

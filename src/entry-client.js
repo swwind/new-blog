@@ -1,10 +1,9 @@
 import { createApp } from './app.js';
-import config from './config.json';
 
 createApp({
   Vue: window.Vue,
   VueRouter: window.VueRouter,
-  Vuex: window.Vuex,
+  Vuex: window.Vuex
 }).then(({ app, store, router }) => {
   if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
@@ -13,7 +12,7 @@ createApp({
   if (window.localStorage.token !== undefined) {
     store.commit('setToken', window.localStorage.token);
   }
-  
+
   router.onError((error) => {
     console.log(error);
     app.$forceUpdate();
@@ -31,19 +30,19 @@ createApp({
         next();
       }
     });
-  
+
     router.beforeResolve((to, from, next) => {
       const matched = router.getMatchedComponents(to);
       const prevMatched = router.getMatchedComponents(from);
-  
+
       const activated = matched.filter((c, i) => {
         return prevMatched[i] !== c;
       });
-  
+
       if (!activated.length) {
         return next();
       }
-  
+
       const componentsWithAsyncData = [];
       const checkedCompoments = [];
       const checkComponent = C => {
@@ -60,7 +59,7 @@ createApp({
           });
         }
       };
-  
+
       activated.forEach(C => {
         checkComponent(C);
       });
@@ -73,7 +72,7 @@ createApp({
         }
       })).then(() => {
         next();
-      }).catch((error) => {
+      }).catch(() => {
         // We couldn't handle error here as `router.replace` will make components 'disappear'
         // on Google Chrome and I don't know why will this shit happen.
         // But server side rendering can redirect this page to error page like 404 not found
@@ -81,9 +80,9 @@ createApp({
         window.location.href = router.resolve(to).href;
       });
     });
-  
+
     console.log(`You are using Xplosiss-git(${process.env.COMMIT || 'unknown'})${process.env.COMMIT && `\nAbout this commit: https://github.com/ntzyz/new-blog/commit/${process.env.COMMIT}`}`);
-  
+
     app.$mount('#app');
   });
 });

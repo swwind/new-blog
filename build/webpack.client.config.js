@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.config');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
@@ -9,12 +8,12 @@ module.exports = merge(base, {
   optimization: {
     runtimeChunk: {
       name: 'manifest'
-    },
+    }
   },
   externals: {
-    'vue': 'Vue',
-    'vuex': 'Vuex',
-    'vue-router': 'VueRouter',
+    vue: 'Vue',
+    vuex: 'Vuex',
+    'vue-router': 'VueRouter'
   },
   plugins: [
     new VueSSRClientPlugin()

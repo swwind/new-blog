@@ -11,7 +11,7 @@
         tr(v-for="file in files")
           td.filename: span {{ file.file }}
           td.mime {{ file.mime || 'text/plain' }}
-          td.operation 
+          td.operation
             a(:href="getFileURL(file.file)" target="_blank") 预览
             a(href="javascript:void(0)" @click="copyMarkdownLink(file)") 复制 MD 链接
             a(@click="deleteFile(file.file)") 删除
@@ -26,7 +26,7 @@ export default {
   name: 'Media',
   data () {
     return {
-      files: [],
+      files: []
     };
   },
   created () {
@@ -37,10 +37,10 @@ export default {
     this.$store.commit('setBusy', false);
     this.fetchFiles();
     this.$nextTick(() => {
-      let input = document.querySelector('input[type="file"]');
-      input.addEventListener('change', ev => {
+      const input = document.querySelector('input[type="file"]');
+      input.addEventListener('change', () => {
         if (input.files && input.files[0]) {
-          let file = input.files[0];
+          const file = input.files[0];
           api.media.uploadFile({ token: this.$store.state.token, file }).then(() => {
             this.fetchFiles();
           });
@@ -57,7 +57,7 @@ export default {
       });
     },
     upload () {
-      let input = document.querySelector('input[type="file"]');
+      const input = document.querySelector('input[type="file"]');
       input.click();
     },
     deleteFile (file) {

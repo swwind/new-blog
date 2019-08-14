@@ -14,10 +14,7 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
-
 import SiteTitle from '../SiteTitle.vue';
-import config from '../../config.json';
 
 export default {
   name: 'AdminSideBar',
@@ -34,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../style/global.scss';
+@import '../../style/color.scss';
 
 .admin-side-bar {
   ul {

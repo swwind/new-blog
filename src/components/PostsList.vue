@@ -25,9 +25,7 @@
 </template>
 
 <script>
-import Pagination from '../components/Pagination.vue';
 
-import config from '../config.json';
 import timeToString from '../utils/timeToString';
 import clickEventMixin from '../utils/link-injector';
 
@@ -42,7 +40,7 @@ export default {
   },
   computed: {
     prefix: function () {
-      let route = this.$route;
+      const route = this.$route;
       if (route.params.category) {
         return `/category/${route.params.category}`;
       } else if (route.params.tag) {
@@ -53,7 +51,7 @@ export default {
   },
   methods: {
     timeToString
-  },
+  }
 };
 </script>
 

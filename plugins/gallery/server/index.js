@@ -15,7 +15,7 @@ function pluginInstaller ({ site, utils }) {
 
     return res.send({
       status: 'ok',
-      images,
+      images
     });
   });
 
@@ -23,7 +23,7 @@ function pluginInstaller ({ site, utils }) {
     if (req.query.token !== utils.token) {
       return res.status(403).send({
         status: 'error',
-        message: utils.messages.ERR_ACCESS_DENIED,
+        message: utils.messages.ERR_ACCESS_DENIED
       });
     }
 
@@ -35,7 +35,7 @@ function pluginInstaller ({ site, utils }) {
         cover: req.body.cover,
         tags: req.body.tags,
         href: req.body.href,
-        date: req.body.date,
+        date: req.body.date
       });
     } catch (e) {
       return res.status(500).send({
@@ -51,10 +51,10 @@ function pluginInstaller ({ site, utils }) {
     if (req.query.token !== utils.token) {
       return res.status(403).send({
         status: 'error',
-        message: utils.messages.ERR_ACCESS_DENIED,
+        message: utils.messages.ERR_ACCESS_DENIED
       });
     }
-  
+
     try {
       await utils.db.conn.collection('gallery').remove(
         { _id: ObjectID(req.params.id) }
@@ -63,10 +63,10 @@ function pluginInstaller ({ site, utils }) {
       console.error(e);
       return res.status(500).send({
         status: 'error',
-        message: utils.messages.ERR_MONGO_FAIL,
+        message: utils.messages.ERR_MONGO_FAIL
       });
     }
-  
+
     res.send({ status: 'ok' });
   });
 
@@ -74,10 +74,10 @@ function pluginInstaller ({ site, utils }) {
     if (req.query.token !== utils.token) {
       return res.status(403).send({
         status: 'error',
-        message: utils.messages.ERR_ACCESS_DENIED,
+        message: utils.messages.ERR_ACCESS_DENIED
       });
     }
-  
+
     try {
       await utils.db.conn.collection('gallery').findAndModify(
         { _id: ObjectID(req.params.id) },
@@ -88,17 +88,17 @@ function pluginInstaller ({ site, utils }) {
           cover: req.body.cover,
           tags: req.body.tags,
           href: req.body.href,
-          date: req.body.date,
-        }}
+          date: req.body.date
+        } }
       );
     } catch (e) {
       console.error(e);
       return res.status(500).send({
         status: 'error',
-        message: utils.messages.ERR_MONGO_FAIL,
+        message: utils.messages.ERR_MONGO_FAIL
       });
     }
-  
+
     res.send({ status: 'ok' });
   });
 }

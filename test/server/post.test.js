@@ -3,12 +3,12 @@
 const supertest = require('supertest');
 const expect = require('chai').expect;
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
+const token = require('../../utils').token;
 
 describe('Testing post-related APIs.', () => {
-  let posts, id;
-  let postTemplate = {
+  let id;
+  const postTemplate = {
     slug: 'foo-bar',
     category: 'emmmm',
     date: new Date(),
@@ -17,17 +17,17 @@ describe('Testing post-related APIs.', () => {
       title: 'foo',
       content: '{123}(666)',
       format: 'markdown',
-      default: true,
+      default: true
     }],
     cover: 'https://www.ntzyz.cn/avatar.jpg',
-    replies: [],
+    replies: []
   };
   const replyTemplate = {
     user: 'foo',
     email: 'bar@foo.baz',
     site: 'localhost.localdomain',
     content: 'Fork you!',
-    datetime: new Date().getTime(),
+    datetime: new Date().getTime()
   };
 
   it('Fetch post list', async () => {
@@ -36,8 +36,6 @@ describe('Testing post-related APIs.', () => {
 
     expect(response.body.status).to.be.ok;
     expect(response.body.posts).not.to.be.undefined;
-
-    posts = response.body.posts;
   });
 
   it('Create new post without token', async () => {
@@ -54,7 +52,6 @@ describe('Testing post-related APIs.', () => {
     expect(response.body.status).to.be.ok;
     expect(response.body.id).not.to.be.undefined;
 
-
     id = response.body.id;
   });
 
@@ -70,8 +67,7 @@ describe('Testing post-related APIs.', () => {
         // Date in response is a string, we need a special judge here:
         expect(new Date(response.body.post[key]).getTime()).equal(postTemplate[key].getTime());
         return;
-      } 
-      else if (key === 'body') {
+      } else if (key === 'body') {
         // Common request will not include the syntax of the post, special judge:
         expect(response.body.post.title).equal(postTemplate[key][0].title);
         // expect(response.body.post.content).equal(postTemplate[key][0].content);
@@ -79,7 +75,7 @@ describe('Testing post-related APIs.', () => {
       }
       expect(response.body.post[key]).to.deep.equal(postTemplate[key]);
     });
-  });  
+  });
 
   it('Check if new post is created by id', async () => {
     const url = `/api/post/by-id/${id}/raw`;
@@ -87,21 +83,21 @@ describe('Testing post-related APIs.', () => {
 
     expect(response.body.status).to.be.ok;
     expect(response.body.post).not.to.be.undefined;
-  });  
+  });
 
   it('Fetch a post by slug which dosent exist', async () => {
     const url = '/api/post/by-slug/fork-you';
     const response = await agent.get(url).expect(404);
 
     expect(response.body.status).equal('error');
-  });  
+  });
 
   it('Get a post with invalid id', async () => {
     const url = '/api/post/by-id/123456/raw';
     const response = await agent.get(url).expect(500);
 
     expect(response.body.status).equal('error');
-  });  
+  });
 
   it('Add a reply to one post', async () => {
     const url = `/api/post/by-slug/${postTemplate.slug}/reply`;
@@ -186,7 +182,7 @@ describe('Testing post-related APIs.', () => {
   it('Create a post with hideOnIndex property', async () => {
     const url = `/api/post?token=${token}`;
     const post = Object.assign({}, postTemplate);
-    
+
     post.hideOnIndex = true;
     post.date = new Date();
     const response = await agent.put(url).set('Content-Type', 'application/json').send(post).expect(200);
@@ -205,8 +201,6 @@ describe('Testing post-related APIs.', () => {
     expect(response.body.posts).not.to.be.undefined;
 
     response.body.posts.forEach(post => expect(post._id).not.equals(id));
-
-    posts = response.body.posts;
   });
 
   it('Delete the new post with valid token', async () => {
@@ -215,5 +209,4 @@ describe('Testing post-related APIs.', () => {
 
     expect(response.body.status).to.be.ok;
   });
-
 });

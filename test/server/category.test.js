@@ -3,7 +3,7 @@
 const supertest = require('supertest');
 const expect = require('chai').expect;
 
-let agent = supertest.agent(require('../../index'));
+const agent = supertest.agent(require('../../index'));
 
 describe('Testing category-related APIs.', () => {
   let categories;

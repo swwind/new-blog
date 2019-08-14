@@ -1,7 +1,7 @@
 const express = require('express');
 const utils = require('../utils');
 
-let api = express.Router();
+const api = express.Router();
 
 api.use(async (req, res, next) => {
   await utils.db.prepare();

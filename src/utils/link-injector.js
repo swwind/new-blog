@@ -10,7 +10,7 @@ const clickEventMixin = {
       }
       if (target && target.href && target.href.indexOf(window.location.origin) === 0 && target.getAttribute('inject') !== 'no') {
         event.preventDefault();
-        let url = new window.URL(target.href);
+        const url = new window.URL(target.href);
         this.$router.push(url.href.replace(url.origin, ''));
       }
     }

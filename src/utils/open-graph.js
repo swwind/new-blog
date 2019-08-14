@@ -1,4 +1,3 @@
-import config from '../config.json';
 
 function getOpenGraph (vm) {
   const { openGraph } = vm.$options;

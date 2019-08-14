@@ -8,7 +8,7 @@
       div
         button(@click="check") CONTINUE
         button(@click="forgot") I FORGOT
-    div(v-show="$store.state.token !== ''") 
+    div(v-show="$store.state.token !== ''")
       h2 身份已认证
       div 在左侧选择任务以继续。
 </template>
@@ -20,15 +20,15 @@ export default {
   name: 'TokenSetter',
   data () {
     return {
-      token: '',
+      token: ''
     };
   },
   watch: {
-    '$route': function () {
+    $route: function () {
       if (this.$route.query.logout === 'true') {
         window.localStorage.token = '';
         this.$store.commit('setToken', '');
-        this.$router.push({ query: {}});
+        this.$router.push({ query: {} });
       }
     }
   },
@@ -37,7 +37,7 @@ export default {
     if (this.$route.query.logout === 'true') {
       window.localStorage.token = '';
       this.$store.commit('setToken', '');
-      this.$router.push({ query: {}});
+      this.$router.push({ query: {} });
     } else {
       console.log(this.$store.state.token);
       this.$nextTick(() => {
@@ -46,7 +46,7 @@ export default {
       });
       // if (window.localStorage.token) {
       //   this.token = window.localStorage.token;
-      //   this.$nextTick(() => { 
+      //   this.$nextTick(() => {
       //     this.$store.commit('setToken', window.localStorage.token);
       //     this.check(true);
       //   });
@@ -69,13 +69,12 @@ export default {
       api.token.forgotToken().then(() => {
         alert('查看服务器输出以获得 token。');
       });
-    },
+    }
   }
 };
 </script>
 
 <style lang="scss">
-@import '../../style/global.scss';
 
 .token-setter {
   text-align: center;

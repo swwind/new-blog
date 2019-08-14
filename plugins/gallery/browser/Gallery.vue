@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.gallery 
+  div.gallery
     div.title-card.card {{ title }}
     div.empty(v-if="!images || images.length === 0") 目前，这里除了好奇什么都没有。
     div.gallery-item.card(v-for="image in images")
@@ -21,7 +21,7 @@ export default {
   name: 'Gallery',
   data () {
     return {
-      activeImage: null,
+      activeImage: null
     };
   },
   computed: {
@@ -57,8 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/style/global.scss';
-
+@import '../../../src/style/color.scss';
 
 .gallery {
   $height: 220px;

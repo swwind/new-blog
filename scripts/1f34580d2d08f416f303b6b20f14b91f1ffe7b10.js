@@ -13,7 +13,7 @@ module.exports = async function () {
 
   for (const iterator of posts) {
     const post = await db.conn.collection('posts').findOne({
-      _id: ObjectID(iterator._id),
+      _id: ObjectID(iterator._id)
     });
 
     const body = [
@@ -22,18 +22,17 @@ module.exports = async function () {
         content: post.content.content,
         language: 'zh',
         format: post.content.encoding,
-        default: true,
+        default: true
       }
     ];
 
     await db.conn.collection('posts').findOneAndUpdate({
-      _id: ObjectID(iterator._id),
+      _id: ObjectID(iterator._id)
     }, {
       $set: { body },
-      $unset: { title: '', content: '' },
+      $unset: { title: '', content: '' }
     });
 
     console.log(':: Updated: ', post.title);
   }
 };
-

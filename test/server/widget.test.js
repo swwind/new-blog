@@ -3,14 +3,14 @@
 const supertest = require('supertest');
 const expect = require('chai').expect;
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
+const token = require('../../utils').token;
 
 describe('Testing widget-related APIs.', () => {
   const widgetTemplate = {
     title: 'Hello World',
     content: 'Hello World',
-    enabled: true,
+    enabled: true
   };
   let widgets;
   let id;
@@ -85,7 +85,7 @@ describe('Testing widget-related APIs.', () => {
 
     expect(response.body.status).equal('error');
   });
-  
+
   it('Delete the new widget without token', async () => {
     const url = `/api/widget/${id}`;
     const response = await agent.delete(url).expect(403);
@@ -107,5 +107,4 @@ describe('Testing widget-related APIs.', () => {
 
     expect(response.body.status).equal('error');
   });
-  
 });

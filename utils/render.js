@@ -1,17 +1,24 @@
 const pug = require('pug');
-const hljs = require('highlight.js');
+const Prism = require('./prism.min.js');
 const config = require('../config');
 const mdit = require('markdown-it');
+const mathjax = require('markdown-it-mathjax')();
+const escapeHTML = mdit().utils.escapeHtml;
 
-function addSpanEachLine (html) {
-  return html.split('\n').map(l => `<span class="__line">${l}</span>`).join('\n');
-}
+const getRenderedCode = (str, lang) => {
+  const code = Prism.languages[lang]
+    ? Prism.highlight(str, Prism.languages[lang], lang)
+    : escapeHTML(str);
+  const lines = str.trim().split('\n').length;
+  const line = `<span class="line-numbers-rows">${new Array(lines).fill('<span></span>').join('')}</span>`;
+  return `<pre class="line-numbers language-${lang}"><code>${code}${line}</code></pre>`;
+};
 
 function render (posts, options) {
   const acceptLanguage = options.acceptLanguage || '';
 
   return posts.map(origPost => {
-    let post = JSON.parse(JSON.stringify(origPost));
+    const post = JSON.parse(JSON.stringify(origPost));
     post.date = new Date(post.date);
 
     // Get all available languages.
@@ -20,7 +27,7 @@ function render (posts, options) {
       const priority = (matchedOffset >= 0) ? (acceptLanguage.length - acceptLanguage.indexOf(body.language)) : -1;
       return {
         name: body.language,
-        priority,
+        priority
       };
     }).sort((a, b) => b.priority - a.priority);
 
@@ -59,22 +66,11 @@ function render (posts, options) {
         }
         post.content = mdit({
           html: true,
-          highlight: function (str, lang) {
-            if (lang && hljs.getLanguage(lang)) {
-              try {
-                return `<pre>${addSpanEachLine(hljs.highlight(lang, str.replace(/(\s+$)/g, ''), true).value)}</pre>`;
-              } catch (__) {}
-            }
-            return `<pre>${str}</pre>`;
-          }
-        }).render(post.content);
-  
-        // Render {AAA}(b) as
-        //   b
-        //  AAA
-        post.content = post.content.replace(/{([^\n]+?)}\(([^\n]+?)\)/g, (m, p1, p2) => {
-          return `<ruby>${p1}<rp>(</rp><rt>${p2}</rt><rp>)</rp></ruby>`;
-        });
+          linkify: true,
+          highlight: getRenderedCode
+        }).use(mathjax).render(post.content);
+
+        // fuck this grammar, my mathjax all exploded
       } else {
         // Render other formats (pug, makrdown, etc) into html
         if (/^(jade|pug)$/i.test(matchedBody.format)) {
@@ -82,40 +78,27 @@ function render (posts, options) {
         } else {
           post.content = matchedBody.content;
         }
-    
+
         // Cut the post content if we are in preview mode.
         if (options.preview && post.content.indexOf('<!-- more -->') >= 0) {
           post.content = post.content.substr(0, post.content.indexOf('<!-- more -->'));
           post.more = true;
         }
-  
-        // Apply syntax highlighting for code blocks.
-        post.content = post.content.replace(/<code lang="(.+?)">([^]+?)<\/code>/g, (match, p1, p2) => {
-          let rendered = hljs.highlight(p1, p2.replace(/(\s+$)/g, '')).value;
-          return `<pre>${addSpanEachLine(rendered)}</pre>`;
-        }).replace(/<code>([^]+?)<\/code>/g, (match, p1) => {
-          let rendered = hljs.highlightAuto(p1.replace(/(\s+$)/g, '')).value;
-          return `<pre>${addSpanEachLine(rendered)}</pre>`;
-        });
+
+        // I will do it on front end
       }
-  
+
       if (post.replies && config.reply.enableMarkdownSupport) {
         post.replies = post.replies.map(reply => {
           if (!reply.content) {
             return {};
           }
-          
+
           reply.content = mdit({
             html: false,
-            highlight: function (str, lang) {
-              if (lang && hljs.getLanguage(lang)) {
-                try {
-                  return `<pre>${addSpanEachLine(hljs.highlight(lang, str.replace(/(\s+$)/g, ''), true).value)}</pre>`;
-                } catch (__) {}
-              }
-              return `<pre>${str}</pre>`;
-            }
-          }).render(reply.content);
+            linkify: true,
+            highlight: getRenderedCode
+          }).use(mathjax).render(reply.content);
           reply.markdown = true;
           return reply;
         });

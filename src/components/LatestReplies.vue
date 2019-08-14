@@ -14,7 +14,7 @@ export default {
   computed: {
     replies: function () { return this.$store.state.replies; }
   },
-  asyncData ({ store, route }) {
+  asyncData ({ store }) {
     return store.dispatch('fetchLatestReplies');
   }
 };

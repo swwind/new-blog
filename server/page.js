@@ -3,7 +3,7 @@ const utils = require('../utils');
 const { ObjectID } = require('mongodb');
 
 const { eventBus } = utils;
-let router = express.Router();
+const router = express.Router();
 
 /**
  * Get all custom pages
@@ -11,7 +11,7 @@ let router = express.Router();
 router.get('/', async (req, res) => {
   let pages;
   try {
-    let cursor = utils.db.conn.collection('pages').find({});
+    const cursor = utils.db.conn.collection('pages').find({});
     pages = await cursor.toArray();
   } catch (e) {
     /* istanbul ignore next */
@@ -23,13 +23,13 @@ router.get('/', async (req, res) => {
     });
   }
 
-  for (let page of pages) {
+  for (const page of pages) {
     delete page.content;
   }
 
   return res.send({
     status: 'ok',
-    pages: pages,
+    pages: pages
   });
 });
 
@@ -53,7 +53,7 @@ router.get('/by-slug/:slug', async (req, res) => {
   if (!page) {
     return res.status(404).send({
       status: 'error',
-      message: utils.messages.ERR_NOT_FOUND,
+      message: utils.messages.ERR_NOT_FOUND
     });
   }
 
@@ -62,12 +62,12 @@ router.get('/by-slug/:slug', async (req, res) => {
     default: true,
     title: page.title,
     content: page.content.content,
-    format: page.content.encoding,
+    format: page.content.encoding
   }];
 
   return res.send({
     status: 'ok',
-    page: utils.render([page], { preview: false, acceptLanguage: req.headers['accept-language'] })[0],
+    page: utils.render([page], { preview: false, acceptLanguage: req.headers['accept-language'] })[0]
   });
 });
 
@@ -91,13 +91,13 @@ router.get('/by-id/:id/raw', async (req, res) => {
   if (!page) {
     return res.status(404).send({
       status: 'error',
-      message: utils.messages.ERR_NOT_FOUND,
+      message: utils.messages.ERR_NOT_FOUND
     });
   }
 
   return res.send({
     status: 'ok',
-    page,
+    page
   });
 });
 
@@ -108,7 +108,7 @@ router.post('/by-id/:id', async (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -119,8 +119,8 @@ router.post('/by-id/:id', async (req, res) => {
       { $set: {
         title: req.body.title,
         slug: req.body.slug,
-        content: req.body.content,
-      }}
+        content: req.body.content
+      } }
     );
   } catch (e) {
     /* istanbul ignore next */
@@ -128,7 +128,7 @@ router.post('/by-id/:id', async (req, res) => {
     /* istanbul ignore next */
     return res.status(500).send({
       status: 'error',
-      message: utils.messages.ERR_MONGO_FAIL,
+      message: utils.messages.ERR_MONGO_FAIL
     });
   }
 
@@ -142,13 +142,13 @@ router.delete('/by-id/:id', async (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
   try {
     await utils.db.conn.collection('pages').deleteOne(
-      { _id: ObjectID(req.params.id) },
+      { _id: ObjectID(req.params.id) }
     );
   } catch (e) {
     /* istanbul ignore next */
@@ -156,7 +156,7 @@ router.delete('/by-id/:id', async (req, res) => {
     /* istanbul ignore next */
     return res.status(500).send({
       status: 'error',
-      message: utils.messages.ERR_MONGO_FAIL,
+      message: utils.messages.ERR_MONGO_FAIL
     });
   }
 
@@ -170,7 +170,7 @@ router.put('/', async (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -179,7 +179,7 @@ router.put('/', async (req, res) => {
     r = await utils.db.conn.collection('pages').insertOne({
       title: req.body.title,
       slug: req.body.slug,
-      content: req.body.content,
+      content: req.body.content
     });
   } catch (e) {
     /* istanbul ignore next */
@@ -187,7 +187,7 @@ router.put('/', async (req, res) => {
     /* istanbul ignore next */
     return res.status(500).send({
       status: 'error',
-      message: utils.messages.ERR_MONGO_FAIL,
+      message: utils.messages.ERR_MONGO_FAIL
     });
   }
 
@@ -205,7 +205,7 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
     user: req.body.user,
     email: '*hidden*',
     site: req.body.site,
-    content: req.body.content,
+    content: req.body.content
   });
 
   try {
@@ -220,7 +220,7 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
         githubId: req.body.githubId,
         gravatar: req.body.gravatar,
         datetime: new Date().getTime()
-      }}}
+      } } }
     );
   } catch (e) {
     /* istanbul ignore next */
@@ -233,7 +233,7 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
   }
 
   return res.send({
-    status: 'ok',
+    status: 'ok'
   });
 });
 

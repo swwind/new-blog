@@ -6,7 +6,7 @@ const path = require('path');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, '../uploads') });
 
-let router = express.Router();
+const router = express.Router();
 
 // Serve all static files through express's serve-static
 // for security
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
         messagee: utils.messages.ERR_FS_FAIL
       });
     }
-    let fileWithMimes = [];
+    const fileWithMimes = [];
     files.filter(file => file[0] !== '.').forEach(file => {
       fileWithMimes.push({
         file,
@@ -41,7 +41,7 @@ router.get('/', (req, res) => {
     });
     res.send({
       status: 'ok',
-      files: fileWithMimes,
+      files: fileWithMimes
     });
   });
 });
@@ -54,7 +54,7 @@ router.put('/:filename', upload.single('file'), (req, res) => {
     fs.unlink(req.file.path, () => {});
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -70,7 +70,7 @@ router.put('/:filename', upload.single('file'), (req, res) => {
     } else {
       res.send({
         status: 'ok',
-        filename: newFileName,
+        filename: newFileName
       });
     }
   });
@@ -83,7 +83,7 @@ router.delete('/:filename', (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -94,11 +94,11 @@ router.delete('/:filename', (req, res) => {
       /* istanbul ignore next */
       res.status(500).send({
         status: 'error',
-        message: err,
+        message: err
       });
     } else {
       res.send({
-        status: 'ok',
+        status: 'ok'
       });
     }
   });

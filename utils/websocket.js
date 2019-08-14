@@ -18,7 +18,7 @@ function attachSocketIO (site) {
       }
     });
   }
-  return { io, server, };
+  return { io, server };
 }
 
 Object.defineProperty(attachSocketIO, 'io', {

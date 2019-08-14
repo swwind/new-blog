@@ -3,8 +3,8 @@
 const supertest = require('supertest');
 const expect = require('chai').expect;
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
+const token = require('../../utils').token;
 
 describe('Testing log-related APIs.', () => {
   it('Fetch logs with valid token', async () => {

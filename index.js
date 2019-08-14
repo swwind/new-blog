@@ -12,8 +12,8 @@ const serve = (p, cache) => express.static(path.resolve(__dirname, p), {
   maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 });
 
-let site = express();
-let pluginRouter = express.Router();
+const site = express();
+const pluginRouter = express.Router();
 
 // disable 'x-powered-by' for security
 site.disable('x-powered-by');
@@ -33,7 +33,7 @@ site.use((req, res, next) => {
 
   if (config.allowedOrigins.indexOf(origin) >= 0) {
     res.setHeader('Access-Control-Allow-Origin', origin);
-    
+
     // PUT must be allowed or nobody can post a reply when CROS.
     res.setHeader('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -64,7 +64,7 @@ utils.websocket.attach(site);
 function createRenderer (bundle, options) {
   return createBundleRenderer(bundle, Object.assign(options, {
     basedir: path.resolve(__dirname, './dist'),
-    runInNewContext: false,
+    runInNewContext: false
   }));
 }
 
@@ -101,7 +101,7 @@ site.use('/service-worker.js', serve('./dist/service-worker.js'));
 site.use(serve('./static'));
 
 // Read client config from ./src/config.js
-let clientConfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'src/config.json'), 'UTF-8'));
+const clientConfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'src/config.json'), 'UTF-8'));
 
 // The actual render entry.
 function render (req, res) {
@@ -121,9 +121,9 @@ function render (req, res) {
     title: clientConfig.title,
     meta: {
       ...clientConfig.meta,
-      links: res.links || [],
+      links: res.links || []
     },
-    acceptLanguage: req.headers['accept-language'],
+    acceptLanguage: req.headers['accept-language']
   };
 
   if (req.path === '/not-found') {
@@ -144,7 +144,7 @@ Object.keys(config.plugins).forEach(plugin => {
 
   try {
     manifest = JSON.parse(fs.readFileSync(path.join(__dirname, './plugins/', plugin, './manifest.json')));
-  } catch(e) {
+  } catch (e) {
     console.error(e);
   }
 
@@ -158,11 +158,11 @@ Object.keys(config.plugins).forEach(plugin => {
 });
 
 // deal with all those unhandled requests here.
-site.get('*', (isProd || isTest) ?
-  (req, res) => {
+site.get('*', (isProd || isTest)
+  ? (req, res) => {
     utils.db.prepare().then(() => render(req, res));
-  } :
-  (req, res) => {
+  }
+  : (req, res) => {
     Promise.all([readyPromise, utils.db.prepare()]).then(() => render(req, res));
   }
 );

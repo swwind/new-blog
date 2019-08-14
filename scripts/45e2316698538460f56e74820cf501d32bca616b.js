@@ -10,7 +10,7 @@ const readline = require('readline').createInterface({
   output: process.stdout
 });
 
-function question(query) {
+function question (query) {
   return new Promise((resolve) => {
     readline.question(query, (answer) => {
       resolve(answer);
@@ -23,7 +23,7 @@ module.exports = async function () {
 
   const posts = await db.conn.collection('posts').find({}).project({ replies: 1 }).toArray();
 
-  for (let post of posts) {
+  for (const post of posts) {
     if (!Array.isArray(post.replies) || post.replies.length === 0) {
       continue;
     }
@@ -40,11 +40,11 @@ module.exports = async function () {
           continue;
         }
 
-        if (a.user === b.user && a.email === b.email
-                              && a.site === b.site
-                              && a.content === b.content
-                              && a.githubId === b.githubId
-                              && Math.abs(a.datetime - b.datetime) < 1000 * 60 * 2 /* 2 minutes */) {
+        if (a.user === b.user && a.email === b.email &&
+                              a.site === b.site &&
+                              a.content === b.content &&
+                              a.githubId === b.githubId &&
+                              Math.abs(a.datetime - b.datetime) < 1000 * 60 * 2 /* 2 minutes */) {
           console.log(`:: Found duplicate reply (in post ${post._id}):`);
           console.log(':: A: \n:: > ' + JSON.stringify(a, null, '  ').replace(/\n/g, '\n:: > '));
           console.log(':: B: \n:: > ' + JSON.stringify(b, null, '  ').replace(/\n/g, '\n:: > '));
@@ -65,7 +65,7 @@ module.exports = async function () {
             console.log(op);
 
             await db.conn.collection('posts').updateOne({
-              _id: ObjectID(post._id),
+              _id: ObjectID(post._id)
             }, op);
             console.log(':: Deleted');
           } else {
@@ -76,4 +76,3 @@ module.exports = async function () {
     }
   }
 };
-

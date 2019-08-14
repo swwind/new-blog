@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../config.json';
 
-function fetchCategoryList (params) {
+function fetchCategoryList () {
   return new Promise((resolve, reject) => {
     axios.get(`${config.api.url}/category`)
       .then(response => resolve(response.data.categories))

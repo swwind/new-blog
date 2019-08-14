@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../config.json';
 
-function fetchTagsList (params) {
+function fetchTagsList () {
   return new Promise((resolve, reject) => {
     axios.get(`${config.api.url}/tag`)
       .then(response => resolve(response.data.tags))

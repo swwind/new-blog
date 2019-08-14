@@ -11,14 +11,14 @@ export default {
   computed: {
     categories () { return this.$store.state.categories; }
   },
-  asyncData ({ store, state }) {
+  asyncData ({ store }) {
     return store.dispatch('fetchCategory');
   }
 };
 </script>
 
 <style lang="scss">
-@import '../style/global.scss';
+@import '../style/color.scss';
 
 div.category-list {
   ul {

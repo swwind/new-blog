@@ -2,10 +2,9 @@
 
 const supertest = require('supertest');
 const expect = require('chai').expect;
-const fakeId = '59423e06ed4418798379a5e7';
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
+const token = require('../../utils').token;
 
 describe('Testing media-related APIs.', () => {
   let uploaded = null;
@@ -24,11 +23,10 @@ describe('Testing media-related APIs.', () => {
     expect(response.body.status).to.be.ok;
   });
 
-
   it('Upload file without token', async () => {
     const url = '/api/media/cpuinfo';
     const response = await agent.put(url)
-      .attach('file', new Buffer('hello world'), 'sample.txt')
+      .attach('file', Buffer.from('hello world'), 'sample.txt')
       .expect(403);
 
     expect(response.body.status).to.be.equal('error');
@@ -37,7 +35,7 @@ describe('Testing media-related APIs.', () => {
   it('Upload file with valid token', async () => {
     const url = `/api/media/cpuinfo.txt?token=${token}`;
     const response = await agent.put(url)
-      .attach('file', new Buffer('hello world'), 'sample.txt')
+      .attach('file', Buffer.from('hello world'), 'sample.txt')
       .expect(200);
 
     expect(response.body.status).to.be.ok;
@@ -59,5 +57,4 @@ describe('Testing media-related APIs.', () => {
 
     expect(response.body.status).to.be.ok;
   });
-
 });

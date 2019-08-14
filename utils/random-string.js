@@ -1,6 +1,6 @@
 /**
  * Create a random string.
- * @param {Number} length 
+ * @param {Number} length
  */
 function randomString (length = 10) {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

@@ -48,33 +48,33 @@ export default {
     return {
       extraDoms: [],
       password: '',
-      wrongPassword: false,
+      wrongPassword: false
     };
   },
   computed: {
-    post () { return this.$store.state.post; },
+    post () { return this.$store.state.post; }
   },
   openGraph () {
     let img = this.post.cover;
     if (!img) {
       const imgs = this.post.content.match(/<img ([^>]+?)>/);
       if (imgs && imgs[1]) {
-        img = imgs[1].match(/src=\"([^"]+?)\"/);
+        img = imgs[1].match(/src="([^"]+?)"/);
         if (img && img[1]) {
           img = img[1];
         }
       }
     }
     return {
-      description: this.post.content.replace(/<(?:.|\n)*?>/gm, '').replace(/[\n\t\r]/g, '').replace(/\"/g, '&quot;').substr(0, 100) + '...',
-      image: img,
+      description: this.post.content.replace(/<(?:.|\n)*?>/gm, '').replace(/[\n\t\r]/g, '').replace(/"/g, '&quot;').substr(0, 100) + '...',
+      image: img
     };
   },
   watch: {
     post (post) {
       document.title = `${post.title || 'Loading...'} - ${config.title}`;
     },
-    '$route': function (route) {
+    $route: function (route) {
       this.$store.dispatch('fetchPostBySlug', { slug: route.params.slug, preferLanguage: route.query['prefer-language'] });
     }
   },
@@ -102,14 +102,14 @@ export default {
     },
     injectScripts () {
       this.$nextTick(() => {
-        let componentRoot = this.$el;
+        const componentRoot = this.$el;
         this.$nextTick(() => {
-          let scripts = Array.from(componentRoot.querySelectorAll('script'));
+          const scripts = Array.from(componentRoot.querySelectorAll('script'));
           if (scripts.length === 0) return;
 
           console.log(`Script to inject: ${scripts.length}`);
           scripts.forEach(script => {
-            let clone = document.createElement('SCRIPT');
+            const clone = document.createElement('SCRIPT');
             if (script.getAttribute('src')) {
               clone.setAttribute('src', script.getAttribute('src'));
             } else {
@@ -118,11 +118,11 @@ export default {
             componentRoot.appendChild(clone);
             this.extraDoms.push(clone);
           });
-          
+
           this.$store.commit('enableForceReload');
         });
       });
-    },
+    }
   }
 };
 
@@ -199,7 +199,7 @@ div.post-view {
       text-shadow: $shadow-color 1px 0px 1px, $shadow-color 0px 1px 1px, $shadow-color 0px -1px 1px, $shadow-color -1px 0px 1px;
     }
   }
-  
+
   div.cover-image {
     display: block;
     position: relative;

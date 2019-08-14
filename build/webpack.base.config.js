@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const fs = require('fs');
 const config = require('../config');
 const { VueLoaderPlugin } = require('vue-loader');
-const child_process = require('child_process');
+const { execSync } = require('child_process');
 
 const clientConfig = {
   title: config.title,
@@ -16,14 +16,14 @@ const clientConfig = {
   },
   components: config.components,
   meta: config.meta,
-  plugins: config.plugins,
+  plugins: config.plugins
 };
 
 fs.writeFileSync(path.join(__dirname, '../src/config.json'), JSON.stringify(clientConfig));
 
 let commit = null;
 try {
-  commit = child_process.execSync('git log -1 --format="%h"').toString().trim();
+  commit = execSync('git log -1 --format="%h"').toString().trim();
 } catch (e) {
   commit = 'unknown';
 }
@@ -33,7 +33,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
     filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -42,8 +42,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+            scss: 'vue-style-loader!css-loader!sass-loader',
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
           }
         }
       },
@@ -52,12 +52,12 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
-          'sass-loader',
-        ],
+          'sass-loader'
+        ]
       },
       {
         test: /\.pug$/,
-        loader: 'pug-plain-loader',
+        loader: 'pug-plain-loader'
       },
       {
         test: /\.js$/,
@@ -75,12 +75,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js'
     }
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true,
+    noInfo: true
   },
   performance: {
     hints: false
@@ -90,10 +90,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.COMMIT': JSON.stringify(commit),
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
     new webpack.IgnorePlugin(/(server|\.md$)/, /plugins/),
-    new VueLoaderPlugin(),
+    new VueLoaderPlugin()
   ]
 };
 

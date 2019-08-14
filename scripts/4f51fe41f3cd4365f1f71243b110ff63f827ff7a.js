@@ -5,14 +5,12 @@
  */
 
 const { db } = require('../utils');
-const { ObjectID } = require('mongodb');
 
 module.exports = async function () {
   await db.prepare();
 
   await db.conn.collection('posts').updateMany(
-    { cover: { $nin: [ '', undefined ] } },
+    { cover: { $nin: ['', undefined] } },
     { $set: { insertCover: true } }
   );
 };
-

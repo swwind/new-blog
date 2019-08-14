@@ -1,11 +1,11 @@
 const config = {
-  database: { 
+  database: {
     address: 'mongodb://localhost:27017/',
-    db: 'newBlog',
+    db: 'newBlog'
   },
   port: 1234,
-  favicon: null,  // local file path
-  avatar: null,   // http/https url
+  favicon: null, // local file path
+  avatar: null, // http/https url
   title: 'ntzyz\'s space',
   subtitle: '∠( ᐛ 」∠)_',
   footer: [
@@ -24,14 +24,14 @@ const config = {
     themeColor: '#FFFFFF'
   },
   page: {
-    size: 5,
+    size: 5
   },
   reply: {
-    enableMarkdownSupport: true,
+    enableMarkdownSupport: true
   },
   allowedOrigins: [
     'https://example.ntzyz.cn',
-    'http://example2.ntzyz.cn',
+    'http://example2.ntzyz.cn'
   ],
   plugins: {
     gallery: {
@@ -40,16 +40,16 @@ const config = {
       title: 'Projects'
     },
     'rss-feed': {
-      enabled: true,
+      enabled: true
     },
     'navigation-sound': {
       enabled: true,
-      audioURL: '/Windows%20Navigation%20Start.aac',
+      audioURL: '/Windows%20Navigation%20Start.aac'
     },
     'telegram-helper': {
       enabled: false,
       ownerId: null,
-      telegramBotToken: null,
+      telegramBotToken: null
     }
   }
 };

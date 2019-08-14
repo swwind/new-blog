@@ -14,7 +14,7 @@ export default {
   computed: {
     widgets: function () { return this.$store.state.widgets; }
   },
-  asyncData ({ store, route }) {
+  asyncData ({ store }) {
     return store.dispatch('fetchWidget');
   }
 };

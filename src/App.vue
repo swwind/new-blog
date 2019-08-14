@@ -30,14 +30,14 @@ export default {
       footer: config.footer,
       progressBarAnimeId: null,
       progressBarAnimeLength: 0,
-      progressBarUpdating: false,
+      progressBarUpdating: false
     };
   },
   openGraph () {
-    let og = {
+    const og = {
       site_name: config.title,
       type: 'website',
-      url: config.url + this.$router.resolve(this.$router.currentRoute).href,
+      url: config.url + this.$router.resolve(this.$router.currentRoute).href
     };
 
     return og;
@@ -46,8 +46,9 @@ export default {
     busy: function () { return this.$store.state.busy; },
     path: function () { return this.$router.resolve(this.$router.currentRoute).href; }
   },
+
   watch: {
-    '$route': function () {
+    $route: function () {
       if (typeof document !== 'undefined') {
         document.querySelector('#left-wrapper').setAttribute('style', '');
       }
@@ -71,18 +72,22 @@ export default {
       }
     }
   },
+  updated () {
+    this.renderKatex();
+  },
   mounted () {
     this.lastScrollY = window.scrollY;
+    setTimeout(this.renderKatex.bind(this), 100);
 
     window.addEventListener('scroll', () => {
       if (window.innerWidth <= 800) {
         document.querySelector('#left-wrapper').setAttribute('style', '');
         return;
-      };
+      }
 
-      let isScrollingDown = (window.scrollY > this.lastScrollY);
-      let left = document.querySelector('#left-wrapper');
-      let bounding = left.getBoundingClientRect();
+      const isScrollingDown = (window.scrollY > this.lastScrollY);
+      const left = document.querySelector('#left-wrapper');
+      const bounding = left.getBoundingClientRect();
       left.parentNode.style.height = `${bounding.height}px`;
 
       if (bounding.height < window.innerHeight) {
@@ -114,6 +119,23 @@ export default {
 
       this.lastScrollY = window.scrollY;
     });
+  },
+  methods: {
+    renderKatex () {
+      try {
+        /* eslint-disable-next-line no-undef */
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '$', right: '$', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ]
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
   }
 };
 </script>

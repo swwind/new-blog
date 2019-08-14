@@ -11,7 +11,7 @@ export default {
   computed: {
     tags: function () { return this.$store.state.tags; }
   },
-  asyncData ({store, route}) {
+  asyncData ({ store }) {
     return store.dispatch('fetchTags');
   }
 };

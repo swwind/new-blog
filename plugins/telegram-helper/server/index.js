@@ -8,8 +8,8 @@ function installer ({ site, utils, config }) {
     const name = params.pageSlug || params.postSlug;
     const URL = config.url + (params.pageSlug ? `/${params.pageSlug}` : `/post/${params.postSlug}`);
     const ipInfo = geoip.lookup(params.ipAddr) || {};
-    
-    let ipRegion = [];
+
+    const ipRegion = [];
 
     if (ipInfo.country) {
       ipRegion.push(ipInfo.country);
@@ -25,7 +25,7 @@ function installer ({ site, utils, config }) {
       chat_id: config.plugins['telegram-helper'].ownerId,
       parse_mode: 'HTML',
       disable_web_page_preview: true,
-      text: `<b>You have a new reply!</b>\nFrom: ${params.user}\nLink: <a href="${URL}">${name}</a>\nIP Address: ${params.ipAddr} (${ipRegion.join('/')})\nContent:\n${params.content}`,
+      text: `<b>You have a new reply!</b>\nFrom: ${params.user}\nLink: <a href="${URL}">${name}</a>\nIP Address: ${params.ipAddr} (${ipRegion.join('/')})\nContent:\n${params.content}`
     });
   });
 
@@ -34,7 +34,7 @@ function installer ({ site, utils, config }) {
       chat_id: config.plugins['telegram-helper'].ownerId,
       parse_mode: 'HTML',
       disable_web_page_preview: true,
-      text: `Your access token is <code>${utils.token}</code>`,
+      text: `Your access token is <code>${utils.token}</code>`
     });
   });
 }

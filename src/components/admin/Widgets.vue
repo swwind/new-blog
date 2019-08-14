@@ -37,7 +37,7 @@ export default {
     return {
       editing: null,
       widgets: [],
-      selected: null,
+      selected: null
     };
   },
   mounted () {
@@ -61,7 +61,7 @@ export default {
       this.editing = Object.assign({
         title: '',
         content: '',
-        enabled: false,
+        enabled: false
       }, this.widgets.filter(widget => widget._id === this.selected)[0]);
       document.querySelector('#app').style.maxWidth = 'initial';
     },
@@ -76,22 +76,22 @@ export default {
         api.widget.updateWidget({
           id: this.editing._id,
           widget: this.editing,
-          token: this.$store.state.token,
+          token: this.$store.state.token
         }).then(() => {
           alert('更新成功');
           this.back();
-        }).catch(e => {
+        }).catch(() => {
           alert('会话过期，请手动刷新');
         });
       } else {
         // create
         api.widget.createWidget({
           widget: this.editing,
-          token: this.$store.state.token,
+          token: this.$store.state.token
         }).then(() => {
           alert('创建成功');
           this.back();
-        }).catch(e => {
+        }).catch(() => {
           alert('会话过期，请手动刷新');
         });
       }
@@ -104,7 +104,7 @@ export default {
         });
       }
     }
-  },
+  }
 };
 </script>
 

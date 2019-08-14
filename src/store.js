@@ -17,10 +17,10 @@ export function createStore ({ Vue, Vuex }) {
       forceReload: false,
       page: {},
       token: '',
-      extraAdminUnits: [],
+      extraAdminUnits: []
     },
     actions,
     mutations
   });
   return store;
-};
+}

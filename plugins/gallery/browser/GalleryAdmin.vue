@@ -18,7 +18,7 @@
             input.short(v-model="date.month")
             | 月
             input.short(v-model="date.day")
-            | 日　
+            | 日
             input.short(v-model="date.hour")
             | 时
             input.short(v-model="date.minute")
@@ -36,7 +36,7 @@
           td: input.full(v-model="image.href")
         tr
           td.label 标签：
-          td: span(v-for="(tag, idx) in arraylize(image.tags)" @click="deleteTag(tag)") {{ '#' + tag }} 
+          td: span(v-for="(tag, idx) in arraylize(image.tags)" @click="deleteTag(tag)") {{ '#' + tag }}
         tr
           td.label 常用标签：
           td
@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   name: 'GalleryAdmin',
@@ -59,7 +58,7 @@ export default {
     return {
       editing: null,
       image: {},
-      date: {},
+      date: {}
     };
   },
   computed: {
@@ -106,7 +105,7 @@ export default {
         cover: this.image.cover,
         tags: this.image.tags,
         href: this.image.href,
-        date: new Date(this.date.year, this.date.month - 1, this.date.day, this.date.hour, this.date.minute, this.date.second),
+        date: new Date(this.date.year, this.date.month - 1, this.date.day, this.date.hour, this.date.minute, this.date.second)
       };
       if (this.editing === undefined) {
         // Create new image.
@@ -137,7 +136,7 @@ export default {
           title: '',
           description: '',
           tags: [],
-          href: '',
+          href: ''
         };
         date = new Date();
       } else {
@@ -153,11 +152,10 @@ export default {
         second: date.getSeconds()
       };
       this._tags = new Set(this.image.tags);
-    },
+    }
   }
 };
 </script>
-
 
 <style lang="scss">
 @import '../../../src/style/form-table.scss';

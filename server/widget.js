@@ -2,7 +2,7 @@ const express = require('express');
 const utils = require('../utils');
 const { ObjectID } = require('mongodb');
 
-let router = express.Router();
+const router = express.Router();
 
 /**
  * Get all enabled widgets
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   }
   return res.send({
     status: 'ok',
-    widgets,
+    widgets
   });
 });
 
@@ -42,7 +42,7 @@ router.get('/all', async (req, res) => {
   }
   return res.send({
     status: 'ok',
-    widgets,
+    widgets
   });
 });
 
@@ -54,7 +54,7 @@ router.post('/:id', async (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -62,7 +62,7 @@ router.post('/:id', async (req, res) => {
     await utils.db.conn.collection('widgets').findAndModify(
       { _id: ObjectID(req.params.id) },
       [],
-      { $set: { title: req.body.title, content: req.body.content, enabled: req.body.enabled }}
+      { $set: { title: req.body.title, content: req.body.content, enabled: req.body.enabled } }
     );
   } catch (e) {
     /* istanbul ignore next */
@@ -70,7 +70,7 @@ router.post('/:id', async (req, res) => {
     /* istanbul ignore next */
     return res.status(500).send({
       status: 'error',
-      message: utils.messages.ERR_MONGO_FAIL,
+      message: utils.messages.ERR_MONGO_FAIL
     });
   }
 
@@ -85,7 +85,7 @@ router.put('/', async (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -102,7 +102,7 @@ router.put('/', async (req, res) => {
     /* istanbul ignore next */
     return res.status(500).send({
       status: 'error',
-      message: utils.messages.ERR_MONGO_FAIL,
+      message: utils.messages.ERR_MONGO_FAIL
     });
   }
 
@@ -116,7 +116,7 @@ router.delete('/:id', async (req, res) => {
   if (req.query.token !== utils.token) {
     return res.status(403).send({
       status: 'error',
-      message: utils.messages.ERR_ACCESS_DENIED,
+      message: utils.messages.ERR_ACCESS_DENIED
     });
   }
 
@@ -130,7 +130,7 @@ router.delete('/:id', async (req, res) => {
     /* istanbul ignore next */
     return res.status(500).send({
       status: 'error',
-      message: utils.messages.ERR_MONGO_FAIL,
+      message: utils.messages.ERR_MONGO_FAIL
     });
   }
 

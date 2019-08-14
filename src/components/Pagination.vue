@@ -19,24 +19,24 @@ export default {
   props: {
     current: {
       type: Number,
-      required: true,
+      required: true
     },
     length: {
       type: Number,
-      required: true,
+      required: true
     },
     max: {
       type: Number,
-      required: true,
+      required: true
     },
     prefix: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data () {
     return {
-      pages: [],
+      pages: []
     };
   },
   watch: {
@@ -52,8 +52,8 @@ export default {
   },
   methods: {
     init () {
-      let current = parseInt(this.current);
-      let left = Math.max(1, current - Math.floor(Number(this.length) / 2));
+      const current = parseInt(this.current);
+      const left = Math.max(1, current - Math.floor(Number(this.length) / 2));
       let pages = new Array(parseInt(this.length)).fill(0).map((dummy, index) => index + left).filter(i => i <= Number(this.max));
 
       if (pages.length < Number(this.length)) {
@@ -80,12 +80,11 @@ export default {
 
       this.pages = pages;
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss">
-@import '../style/global.scss';
 nav.pagination {
   $size: 28px;
   position: relative;

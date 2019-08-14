@@ -55,15 +55,15 @@ export default {
   props: {
     replies: {
       type: Array,
-      required: true,
+      required: true
     },
-    'apiPath': {
+    apiPath: {
       type: String,
-      required: true,
+      required: true
     },
-    'refreshReplies': {
+    refreshReplies: {
       type: Function,
-      required: true,
+      required: true
     }
   },
   data () {
@@ -74,12 +74,12 @@ export default {
       site: '',
       githubId: '',
       replyTo: null,
-      busy: false,
+      busy: false
     };
   },
   computed: {
     replyTree () {
-      let replies = this.replies.map((el, idx) => {
+      const replies = this.replies.map((el, idx) => {
         el.index = idx;
         return el;
       });
@@ -88,10 +88,10 @@ export default {
         return;
       }
 
-      let nodes = [];
-      let root = [];
+      const nodes = [];
+      const root = [];
       replies.forEach((reply, index) => {
-        let node = new ReplyNode(reply);
+        const node = new ReplyNode(reply);
         nodes[index] = node;
 
         if (typeof reply.replyTo === 'number') {
@@ -101,8 +101,8 @@ export default {
         }
       });
 
-      let treeView = [];
-      let dfs = (node, depth = 0) => {
+      const treeView = [];
+      const dfs = (node, depth = 0) => {
         const value = node.value;
         value.depth = depth;
         treeView.push(value);
@@ -136,14 +136,14 @@ export default {
 
       this.busy = true;
 
-      let data = {
+      const data = {
         user: this.name,
         email: this.email,
         site: this.site,
         content: this.content,
         replyTo: this.replyTo,
         githubId: this.githubId,
-        gravatar: this.email ? md5(this.email) : '',
+        gravatar: this.email ? md5(this.email) : ''
       };
 
       if (!data.user) {
@@ -157,7 +157,7 @@ export default {
       api[this.$props.apiPath].putReplyBySlug({ slug: this.$route.params.slug, data })
         .then(() => {
           if (this.$store.state.forceReload) {
-            window.location.href = window.location.href;
+            window.location.reload();
           } else {
             this.$props.refreshReplies();
           }
@@ -172,7 +172,7 @@ export default {
         content: '',
         site: '',
         githubId: '',
-        replyTo: null,
+        replyTo: null
       });
     },
     setReplyTo (idx) {
@@ -181,13 +181,13 @@ export default {
     },
     focusReplyForm () {
       this.$el.querySelector('#reply-form').scrollIntoView();
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss">
-@import '../style/global.scss';
+@import '../style/color.scss';
 @import '../style/form-table.scss';
 
 div.reply {

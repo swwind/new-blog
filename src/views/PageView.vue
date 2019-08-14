@@ -24,11 +24,11 @@ export default {
   openGraph () {
     return {
       description: this.page.content.replace(/<(?:.|\n)*?>/gm, '').substr(0, 50) + '...',
-      image: this.page.cover,
+      image: this.page.cover
     };
   },
   watch: {
-    '$route': function (route) {
+    $route: function (route) {
       return this.$store.dispatch('fetchPageBySlug', route.params.slug);
     },
     page (page) {
@@ -37,7 +37,7 @@ export default {
       }
     }
   },
-  asyncData({ route, store, redirect }) {
+  asyncData ({ route, store }) {
     return store.dispatch('fetchPageBySlug', route.params.slug);
   },
   methods: {
@@ -47,7 +47,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss">
 .page-view {

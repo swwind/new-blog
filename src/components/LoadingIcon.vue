@@ -17,12 +17,13 @@
 
 <script>
 export default {
-  name: 'LoadingIcon',
+  name: 'LoadingIcon'
 };
 </script>
 
 <style lang="scss">
-@import '../style/global.scss';
+@import '../style/color.scss';
+
 div.wrapper {
   width: 100%;
   height: 100vh;

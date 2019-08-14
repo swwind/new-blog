@@ -1,8 +1,7 @@
-import regeneratorRuntime from 'regenerator-runtime';
 import axios from 'axios';
 
 import App from './App.vue';
-import { createRouter, postCreateRouter, coreComponents } from './router';
+import { createRouter, coreComponents } from './router';
 import { createStore } from './store';
 import config from './config.json';
 
@@ -26,12 +25,13 @@ export async function createApp (libs) {
   Vue.use(Vuex);
   Vue.mixin(titleMixin);
   Vue.mixin(openGraphMixin);
-    
+
   const router = createRouter(null, libs);
   const store = createStore(libs);
 
   const app = new Vue({
-    router, store,
+    router,
+    store,
     render: h => h(App)
   });
 
@@ -49,16 +49,16 @@ export async function createApp (libs) {
     path: '/:slug',
     components: {
       default: coreComponents.PageView,
-      sidebar: coreComponents.ClientSideBar,
+      sidebar: coreComponents.ClientSideBar
     },
     meta: { keepAlive: false }
   }, {
     path: '*',
     components: {
       default: coreComponents.NotFound,
-      sidebar: coreComponents.ClientSideBar,
+      sidebar: coreComponents.ClientSideBar
     },
-    meta: { keepAlive: true },
+    meta: { keepAlive: true }
   }]);
 
   return { app, router, store };

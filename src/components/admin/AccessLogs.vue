@@ -16,7 +16,7 @@ export default {
     return {
       socket: null,
       logs: [],
-      logsText: '',
+      logsText: ''
     };
   },
   mounted () {
@@ -29,10 +29,10 @@ export default {
       const url = new URL(config.api.url + '/ws');
       this.logs = logs;
       this.socket = io.connect(url.origin, { path: url.pathname, query: `token=${this.$store.state.token}` });
-      this.socket.on('log', text => { 
+      this.socket.on('log', text => {
         this.logs.push(text);
         setTimeout(() => {
-          let list = document.querySelector('div.container');
+          const list = document.querySelector('div.container');
           list.scrollTop = list.scrollHeight;
         }, 0);
       });

@@ -10,7 +10,6 @@
 import Pagination from '../components/Pagination.vue';
 import PostsList from '../components/PostsList.vue';
 
-import config from '../config.json';
 import timeToString from '../utils/timeToString';
 import clickEventMixin from '../utils/link-injector';
 
@@ -24,7 +23,7 @@ export default {
   computed: {
     posts: function () { return this.$store.state.posts; },
     prefix: function () {
-      let route = this.$route;
+      const route = this.$route;
       if (route.params.category) {
         return `/category/${route.params.category}`;
       } else if (route.params.tag) {
@@ -35,7 +34,7 @@ export default {
   },
   title () {
     const route = this.$route;
-    
+
     if (route.params.category) {
       this.title = `分类：${route.params.category}`;
       return this.title;
@@ -49,7 +48,7 @@ export default {
   },
   openGraph () {
     const route = this.$route;
-    let og = {};
+    const og = {};
     if (route.params.category) {
       og.description = `查看${route.params.category}分类下的所有文章`;
     } else if (route.params.tag) {
@@ -60,8 +59,8 @@ export default {
     return og;
   },
   watch: {
-    '$route': function () {
-      this.promise = this.$options.asyncData({store: this.$store, route: this.$route });
+    $route: function () {
+      this.promise = this.$options.asyncData({ store: this.$store, route: this.$route });
     }
   },
   asyncData ({ store, route }) {
@@ -80,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/global.scss';
+@import '../style/color.scss';
 
 div.posts-list {
 
@@ -170,7 +169,7 @@ div.posts-list {
       text-shadow: $shadow-color 1px 0px 1px, $shadow-color 0px 1px 1px, $shadow-color 0px -1px 1px, $shadow-color -1px 0px 1px;
     }
   }
-  
+
   div.cover-image {
     display: block;
     position: relative;

@@ -8,8 +8,8 @@ export function pluginInstaller ({ app, router, store, coreComponents, config })
       path: config.plugins.gallery.mountPoint || '/gallery',
       components: {
         default: Gallery,
-        sidebar: coreComponents.ClientSideBar,
-      },
+        sidebar: coreComponents.ClientSideBar
+      }
     }, {
       path: '/admin/gallery',
       components: {
@@ -22,7 +22,7 @@ export function pluginInstaller ({ app, router, store, coreComponents, config })
   store.registerModule('gallery', {
     state: {
       title: config.plugins.gallery.title || 'Gallery',
-      images: {},
+      images: {}
     },
     actions: {
       fetchImages: state => {
@@ -41,13 +41,13 @@ export function pluginInstaller ({ app, router, store, coreComponents, config })
       }
     },
     mutations: {
-      setImages: (store, images) => store.images = images,
+      setImages: (store, images) => (store.images = images)
     }
   });
 
   store.commit('addAdminUnit', {
     name: '管理 Gallery',
-    href: '/admin/gallery',
+    href: '/admin/gallery'
   });
 
   return Promise.resolve();

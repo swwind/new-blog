@@ -4,7 +4,6 @@ import Vuex from 'vuex';
 
 import { createApp } from './app.js';
 import axios from 'axios';
-import regeneratorRuntime from 'regenerator-runtime';
 
 function axiosMiddleware (config) {
   config.headers['server-side-rendering'] = true;
@@ -32,13 +31,13 @@ export default context => new Promise((resolve, reject) => {
   }).then(({ app, store, router }) => {
     router.push(context.url);
 
-    router.onReady(() => {      
+    router.onReady(() => {
       const matchedComponents = router.getMatchedComponents();
-  
+
       if (!matchedComponents.length) {
         return reject({ code: 404, url: '/not-found' });
       }
-  
+
       const componentsWithAsyncData = [];
       const checkedCompoments = [];
       const checkComponent = C => {
@@ -55,11 +54,11 @@ export default context => new Promise((resolve, reject) => {
           });
         }
       };
-  
+
       matchedComponents.forEach(C => {
         checkComponent(C);
       });
-  
+
       Promise.all(componentsWithAsyncData.map(Component => {
         return Component.asyncData({
           store,

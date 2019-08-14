@@ -3,8 +3,7 @@
 const supertest = require('supertest');
 const expect = require('chai').expect;
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
 
 describe('Testing reply-related APIs.', () => {
   it('Fetch latest replies', async () => {

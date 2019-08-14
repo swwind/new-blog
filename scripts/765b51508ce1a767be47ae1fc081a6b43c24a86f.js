@@ -14,4 +14,3 @@ module.exports = async function () {
     await db.conn.collection('logs').drop();
   }
 };
-

@@ -2,7 +2,7 @@ const express = require('express');
 const utils = require('../utils');
 
 const { eventBus } = utils;
-let router = express.Router();
+const router = express.Router();
 
 /**
  * Print access token to stdout.
@@ -10,7 +10,7 @@ let router = express.Router();
 router.get('/forgot', (req, res) => {
   eventBus.emit(eventBus.EVENT_TOKEN_FORGOT, {
     ipAddr: req.headers['x-real-ip'] || req.ip,
-    userAgent: req.headers['user-agent'],
+    userAgent: req.headers['user-agent']
   });
 
   console.log(`Your access token is ${utils.token}`);

@@ -27,7 +27,7 @@ function uploadFile (params = {}) {
     }
   }
 
-  let fd = new FormData();
+  const fd = new FormData();
   fd.append('file', params.file);
 
   return axios.put(`${config.api.url}/media/${encodeURIComponent(params.file.name)}?token=${params.token}`, fd);

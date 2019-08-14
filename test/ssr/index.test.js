@@ -1,16 +1,14 @@
 'use strict';
 
 const supertest = require('supertest');
-const expect = require('chai').expect;
 const config = require('../../config');
 
-let agent = supertest.agent(require('../../index'));
-let token = require('../../utils').token;
+const agent = supertest.agent(require('../../index'));
 
 describe('Testing index-rendering with SSR', async () => {
   it('Render index', async () => {
     const url = '/';
-    const response = await agent.get(url).expect(200);
+    await agent.get(url).expect(200);
   });
 
   it('Render tag view', async () => {
@@ -18,7 +16,7 @@ describe('Testing index-rendering with SSR', async () => {
     const tags = (await agent.get('/api/tag').expect(200)).body.tags;
 
     const url = `/tag/${tags[0].tag}`;
-    const response = await agent.get(url).expect(200);
+    await agent.get(url).expect(200);
   });
 
   it('Render category view', async () => {
@@ -26,22 +24,22 @@ describe('Testing index-rendering with SSR', async () => {
     const categories = (await agent.get('/api/category').expect(200)).body.categories;
 
     const url = `/category/${encodeURIComponent(categories[0])}`;
-    const response = await agent.get(url).expect(200);
+    await agent.get(url).expect(200);
   });
 
   it('Get favicon.ico', async () => {
     const url = '/favicon.ico';
-    const response = await agent.get(url).expect(config.favicon === null ? 404 : 200);
+    await agent.get(url).expect(config.favicon === null ? 404 : 200);
   });
 
   it('Get a page that doesnt exist', async () => {
     const url = '/blablaemm';
-    const response = await agent.get(url).expect(302).expect('Location', '/not-found');
+    await agent.get(url).expect(302).expect('Location', '/not-found');
   });
 
   it('Render 404 page', async () => {
     const url = '/not-found';
-    const response = await agent.get(url).expect(404);
+    await agent.get(url).expect(404);
   });
 
   it('Render RSS feeds', async () => {
@@ -57,5 +55,4 @@ describe('Testing index-rendering with SSR', async () => {
     }
     await agent.get(config.plugins.gallery.mountPoint).expect(200);
   });
-
 });
