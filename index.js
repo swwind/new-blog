@@ -4,6 +4,7 @@ const config = require('./config');
 const utils = require('./utils');
 const fs = require('fs');
 const path = require('path');
+const vhost = require('vhost');
 const { createBundleRenderer } = require('vue-server-renderer');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -168,8 +169,23 @@ site.get('*', (isProd || isTest)
 );
 
 // Establish database connection and start http service
-utils.websocket.server.listen(config.port, /* 'localhost', */() => {
-  console.log(`Server started on port ${config.port}`);
-});
+// utils.websocket.server.listen(config.port, /* 'localhost', */() => {
+//   console.log(`Server started on port ${config.port}`);
+// });
+
+const gallery = require('./plugins/my-gallery');
+
+if (config.port === 80) {
+  const app = express();
+  app.use(vhost('blog.swwind.me', site));
+  app.use(vhost('gallery.swwind.me', gallery));
+  app.listen(config.port, () => {
+    console.log(`Server started on port ${config.port}`);
+  });
+} else {
+  site.listen(config.port);
+  gallery.listen(config.port + 1);
+  console.log(`Server started on port ${config.port} and ${config.port + 1}`);
+}
 
 module.exports = site;
