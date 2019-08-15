@@ -13,6 +13,11 @@ const config = {
     'Except where otherwise noted, content on this blog is licensed under CC-BY 2.0.'
   ],
   url: 'https://new.ntzyz.cn', // no slash at the end of url
+  https: { // enabled if port === 443
+    hsts: true, // listen to 80 for 302
+    cert: './cert.pem',
+    key: './cert.key.pem'
+  },
   language: 'zh-CN',
   components: {
     title: true,

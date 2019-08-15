@@ -58,9 +58,6 @@ site.get('/favicon.ico', (req, res) => {
   }
 });
 
-// Attach Socket.IO handlers
-utils.websocket.attach(site);
-
 // Factory for Vue renderer
 function createRenderer (bundle, options) {
   return createBundleRenderer(bundle, Object.assign(options, {
@@ -168,24 +165,34 @@ site.get('*', (isProd || isTest)
   }
 );
 
-// Establish database connection and start http service
-// utils.websocket.server.listen(config.port, /* 'localhost', */() => {
-//   console.log(`Server started on port ${config.port}`);
-// });
+const gallery = require('./extensions/gallery');
 
-const gallery = require('./plugins/my-gallery');
+const app = express();
 
 if (config.port === 80) {
-  const app = express();
-  app.use(vhost('blog.swwind.me', site));
+  app.use(vhost('localhost', site));
   app.use(vhost('gallery.swwind.me', gallery));
-  app.listen(config.port, () => {
-    console.log(`Server started on port ${config.port}`);
-  });
 } else {
-  site.listen(config.port);
-  gallery.listen(config.port + 1);
-  console.log(`Server started on port ${config.port} and ${config.port + 1}`);
+  app.use(site);
 }
 
-module.exports = site;
+const option = config.port === 443 && {
+  key: fs.readFileSync(path.resolve(__dirname, config.https.key), 'utf-8'),
+  cert: fs.readFileSync(path.resolve(__dirname, config.https.cert), 'utf-8')
+};
+
+const { server } = utils.websocket.attach(app, option);
+
+server.listen(config.port, () => {
+  console.log(`Server started on port ${config.port}`);
+});
+
+if (config.port === 443 && config.https.hsts) {
+  const jump = express();
+  jump.use((req, res) => res.redirect('https://' + req.headers.host + req.url));
+  jump.listen(80, () => {
+    console.log('HSTS started on 80');
+  });
+}
+
+module.exports = app;

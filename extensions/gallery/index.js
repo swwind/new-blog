@@ -24,7 +24,6 @@ for (const dir of galleryDir) {
     const picnumber = filelist.filter((filename) => filename.indexOf('thumbnail') > -1).length;
     if (picnumber) {
       data.set(dir, picnumber);
-      console.log('scanned gallery folder `%s` with %d pictures.', dir, picnumber);
     }
   }
 }

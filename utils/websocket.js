@@ -1,13 +1,16 @@
 const http = require('http');
+const https = require('https');
 const socket = require('socket.io');
 const token = require('./token');
 
 let server;
 let io;
 
-function attachSocketIO (site) {
+function attachSocketIO (site, option) {
   if (site) {
-    server = http.Server(site);
+    server = option
+      ? https.createServer(option, site)
+      : http.createServer(site);
     io = socket(server, { path: '/api/ws' });
     io.on('connection', socket => {
       console.log('Client connected!');
