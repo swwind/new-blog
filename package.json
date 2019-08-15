@@ -46,7 +46,7 @@
     "regenerator-runtime": "^0.13.1",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
-    "ua-parser-js": "^0.7.19",
+    "ua-parser-js": "^0.7.20",
     "utf-8-validate": "^5.0.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

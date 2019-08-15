@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 
+import 'regenerator-runtime';
+
 import { createApp } from './app.js';
 import axios from 'axios';
 

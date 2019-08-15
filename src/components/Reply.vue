@@ -10,6 +10,9 @@
             div.fallback-avatar {{ reply.user.trim().substr(0, 1).toUpperCase() }}
           div.reply-body
             a.name(v-bind:href="reply.site || false", target="view_window") {{ reply.user }}
+            div.tags
+              span.osname(v-if="reply.os") {{ reply.os.name }} {{ reply.os.version }}
+              span.browser(v-if="reply.browser") {{ reply.browser.name }} {{ reply.browser.version }}
             div.date {{ timeToString(reply.datetime) }}
             div(v-html="reply.content" v-if="reply.markdown")
             div.raw-content(v-else) {{ reply.content }}
@@ -44,6 +47,7 @@
 import timeToString from '../utils/timeToString';
 import api from '../api';
 import md5 from 'md5';
+import detect from 'ua-parser-js';
 
 function ReplyNode (value) {
   this.value = value;
@@ -74,13 +78,18 @@ export default {
       site: '',
       githubId: '',
       replyTo: null,
-      busy: false
+      busy: false,
     };
   },
   computed: {
     replyTree () {
       const replies = this.replies.map((el, idx) => {
         el.index = idx;
+        if (el.ua) {
+          const result = detect(el.ua);
+          el.os = result.os;
+          el.browser = result.browser;
+        }
         return el;
       });
 
@@ -97,7 +106,7 @@ export default {
         if (typeof reply.replyTo === 'number') {
           nodes[reply.replyTo].childs.push(node);
         } else {
-          root.push(node);
+          root.unshift(node);
         }
       });
 
@@ -180,7 +189,7 @@ export default {
       this.focusReplyForm();
     },
     focusReplyForm () {
-      this.$el.querySelector('#reply-form').scrollIntoView();
+      this.$el.querySelector('#reply-form').scrollIntoView({ block: 'center', behavior: 'smooth' });
     }
   }
 };
@@ -305,9 +314,19 @@ div.reply {
         }
       }
     }
-    div.date, a.name {
+    div.date, a.name, div.tags {
       font-size: 0.8em;
       color: grey;
+    }
+    div.tags {
+      display: inline-block;
+
+      span {
+        padding: 2px 5px;
+        border-radius: 2px;
+        margin-left: 10px;
+        background-color: rgba(0, 0, 0, .05);
+      }
     }
   }
 

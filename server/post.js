@@ -110,6 +110,7 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
     await utils.db.conn.collection('posts').update(
       { slug: req.params.slug },
       { $push: { replies: {
+        ua: req.headers['user-agent'],
         user: req.body.user,
         email: req.body.email,
         site: req.body.site,
@@ -117,7 +118,8 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
         replyTo: req.body.replyTo,
         githubId: req.body.githubId,
         gravatar: req.body.gravatar,
-        datetime: new Date().getTime()
+        // FIXME: __$datetime is a temporary solution
+        datetime: req.body.__$datetime || new Date().getTime()
       } } }
     );
   } catch (e) {
