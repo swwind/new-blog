@@ -3,7 +3,7 @@
     h3.title 管理自定义页面
     div(v-if="editing === null")
       ul.pages-list
-        li(v-for="page in pages" @click="edit(page._id)") {{ page.title }}
+        li(v-for="page in pages" @click="edit(page._id)" v-text="page.title")
         li(@click="edit(undefined)") 创建新的自定义页面
     div(v-else)
       table.form-table

@@ -1,7 +1,7 @@
 <template lang="pug">
   .page-view
     .card
-      h3.title {{ page.title }}
+      h3.title(v-text="page.title")
       article.page-content(v-html="page.content", @click="linkEventHandler")
     reply(:replies="page.replies || []", api-path="page", :refresh-replies="refreshReplies")
 </template>

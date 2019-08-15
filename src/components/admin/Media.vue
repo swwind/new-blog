@@ -9,8 +9,8 @@
           th.mime MIME
           th.operation 操作
         tr(v-for="file in files")
-          td.filename: span {{ file.file }}
-          td.mime {{ file.mime || 'text/plain' }}
+          td.filename: span(v-text="file.file")
+          td.mime(v-text="file.mime || 'text/plain'")
           td.operation
             a(:href="getFileURL(file.file)" target="_blank") 预览
             a(href="javascript:void(0)" @click="copyMarkdownLink(file)") 复制 MD 链接

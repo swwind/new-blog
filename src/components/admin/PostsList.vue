@@ -8,10 +8,10 @@
         th 分类
         th.tag 标签
       tbody: tr(v-for="post in posts")
-        td.title: span: router-link(:to="'/admin/post/edit/' + post._id") {{ post.title }}
-        td.center.date: span {{ timeToString(post.date, true) }}
-        td.center.category: span {{ post.category }}
-        td.tag: span {{ post.tags ? post.tags.join(', '): '' }}
+        td.title: span: router-link(:to="'/admin/post/edit/' + post._id", v-text="post.title")
+        td.center.date: span(v-text="timeToString(post.date, true)")
+        td.center.category: span(v-text="post.category")
+        td.tag: span(v-text="post.tags ? post.tags.join(', '): ''")
     pagination(v-if="pages && pages.current", :current="pages.current", :length="7", :max="pages.max", prefix="/admin/post")
 </template>
 

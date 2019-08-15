@@ -9,16 +9,16 @@
         td.label 分类：
         td
           select.full(v-if="category === '' || categories.indexOf(category) >= 0" v-model="category")
-            option(v-for="c in categories", :value="c") {{ c }}
+            option(v-for="c in categories", :value="c", v-text="c")
             option(vaule="") 自定义
           input(v-else v-model="category")
       tr
         td.label 标签：
-        td: span(v-for="(tag, idx) in arraylize(tags)" @click="deleteTag(tag)") {{ '#' + tag }}
+        td: span(v-for="(tag, idx) in arraylize(tags)" @click="deleteTag(tag)", v-text="'#' + tag")
       tr
         td.label 常用标签：
         td
-          button.tag(v-for="tag in $store.state.tags" @click="addTag(tag.tag)") {{ tag.tag }}
+          button.tag(v-for="tag in $store.state.tags" @click="addTag(tag.tag)", v-text="tag.tag") 
           button.tag(@click="addTag(prompt('新标签叫啥呢？'))") +
       tr
         td.label 封面图片：
@@ -50,7 +50,7 @@
       tr
         td.label 自然语言：
         td: select(v-model="editingLanguage")
-          option(v-for="item of body" :key="item.language" :value="item.language") {{ item.language }}
+          option(v-for="item of body" :key="item.language" :value="item.language", v-text="item.language")
           option(:value="null") 新增语言
       template(v-for="item of body" v-if="editingLanguage === item.language")
         tr

@@ -4,7 +4,7 @@
       h3.title 从列表中选择一个待编辑的工具
       div.container
         select.widget-picker(v-model="selected")
-          option(v-for="widget in widgets" :value="widget._id") {{ widget.title }}
+          option(v-for="widget in widgets" :value="widget._id", v-text="widget.title")
           option(:value="null") 创建一个新的小工具
         button.widget-edit-button(@click="editWidget(selected)") 继续
     div.card(v-else)

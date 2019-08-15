@@ -1,7 +1,7 @@
 <template lang="pug">
   div.posts-list
     transition(name="forward"): div(:key="title")
-      div.title-card.card(v-show="title") {{ title }}
+      div.title-card.card(v-show="title", v-text="title")
       posts-list(:posts="posts")
       pagination(v-if="$store.state.pages", :current="$store.state.pages.current", :length="7", :max="$store.state.pages.max", :prefix="prefix")
 </template>

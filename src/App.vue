@@ -10,7 +10,7 @@
       transition(name="forward")
         router-view(v-if="!$route.meta.keepAlive")
       footer
-        div.row(v-for="line in footer") {{ line }}
+        div.row(v-for="line in footer", v-text="line")
     #progress-bar(v-bind:style="{ width: `${progressBarAnimeLength}vw`}", v-bind:class="{ updating: busy && progressBarUpdating, finishing: (!busy) && progressBarUpdating }")
 </template>
 

@@ -4,20 +4,20 @@
       div.cover-image(v-if="post.cover && !post.insertCover" v-bind:style="{ backgroundImage: `url(${ post.cover })` }")
         div.placeholder
         header.image-overlay
-          router-link(:to="'/post/' + post.slug"): h2.post-title {{ post.title }}
+          router-link(:to="'/post/' + post.slug"): h2.post-title(v-text="post.title")
           div.post-meta
-            span {{ timeToString(post.date, true) }}
-            span 分类：{{ post.category }}
+            span(v-text="timeToString(post.date, true)")
+            span(v-text="`分类：${post.category}`")
             span(v-for="tag in post.tags") #
-              router-link(:to="'/tag/' + tag") {{ tag }}
+              router-link(:to="'/tag/' + tag", v-text="tag")
       .content
         header(v-if="!post.cover || post.insertCover")
-          h2.post-title {{ post.title }}
+          h2.post-title(v-text="post.title")
           div.post-meta
-            span {{ timeToString(post.date, true) }}
-            span 分类：{{ post.category }}
+            span(v-text="timeToString(post.date, true)")
+            span(v-text="`分类：${post.category}`")
             span(v-for="tag in post.tags")
-              router-link(:to="'/tag/' + tag") \#{{ tag }}
+              router-link(:to="'/tag/' + tag", v-text="'#' + tag")
         article.post-content(v-if="post.cover && post.insertCover")
           img(:src="post.cover" style="width: 100%;")
         article.protect-article.post-content(v-if="post.protected")

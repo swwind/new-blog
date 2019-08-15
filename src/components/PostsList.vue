@@ -4,20 +4,20 @@
       div.cover-image(v-if="post.cover" v-bind:style="{ backgroundImage: `url(${ post.cover })` }")
         div.placeholder
         header.image-overlay
-          router-link(:to="'/post/' + post.slug"): h2.post-title {{ post.title }}
+          router-link(:to="'/post/' + post.slug"): h2.post-title(v-text="post.title")
           div.post-meta
-            span {{ timeToString(post.date, true) }}
-            span 分类：{{ post.category }}
+            span(v-text="timeToString(post.date, true)")
+            span(v-text="`分类：${post.category}`")
             span(v-for="tag in post.tags") #
-              router-link(:to="'/tag/' + tag") {{ tag }}
+              router-link(:to="'/tag/' + tag", v-text="tag")
       div.content
         header(v-if="!post.cover")
-          router-link(:to="'/post/' + post.slug"): h2.post-title {{ post.title }}
+          router-link(:to="'/post/' + post.slug"): h2.post-title(v-text="post.title")
           div.post-meta
-            span {{ timeToString(post.date, true) }}
-            span 分类：{{ post.category }}
+            span(v-text="timeToString(post.date, true)")
+            span(v-text="`分类：${post.category}`")
             span(v-for="tag in post.tags") #
-              router-link(:to="'/tag/' + tag") {{ tag }}
+              router-link(:to="'/tag/' + tag", v-text="tag")
         article.post-preview(v-if="post.protected") 这是一个受密码保护的文章，请点击下放的更多按钮，并提供密码。
         article.post-preview(v-else v-html="post.content" @click="linkEventHandler")
         footer(v-if="post.more")

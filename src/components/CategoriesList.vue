@@ -2,7 +2,7 @@
   div.category-list.card(v-if="categories.length > 0")
     h3.title Category
     ul
-      li(v-for="category in categories"): router-link(:to="'/category/' + category") {{ category }}
+      li(v-for="category in categories"): router-link(:to="'/category/' + category", v-text="category")
 </template>
 
 <script>

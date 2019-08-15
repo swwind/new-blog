@@ -2,7 +2,7 @@
   div.realtime-access-logs.card
     h3.title 实时日志
     div.container
-      pre: span(v-for="log in logs" class="__line") {{ log }}
+      pre: span(v-for="log in logs" class="__line", v-text="log")
 </template>
 
 <script>

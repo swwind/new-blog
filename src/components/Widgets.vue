@@ -1,7 +1,7 @@
 <template lang="pug">
   div.widgets
     div.card(v-for="widget in widgets")
-      h3.title {{ widget.title }}
+      h3.title(v-text="widget.title")
       div.content(v-html="widget.content" @click="linkEventHandler")
 </template>
 

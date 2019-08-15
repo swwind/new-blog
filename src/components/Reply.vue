@@ -7,19 +7,20 @@
           a.avatar(v-bind:href="reply.site || false", target="view_window")
             div.gravatar-avatar(v-if="reply.gravatar", v-bind:style="{ backgroundImage: `url(https://gravatar.loli.net/avatar/${reply.gravatar}?d=mm&s=40)` }")
             div.github-avatar(v-if="reply.githubId", v-bind:style="{ backgroundImage: `url(https://github.com/${reply.githubId}.png)` }")
-            div.fallback-avatar {{ reply.user.trim().substr(0, 1).toUpperCase() }}
+            div.fallback-avatar(v-text="reply.user.trim().substr(0, 1).toUpperCase()")
           div.reply-body
-            a.name(v-bind:href="reply.site || false", target="view_window") {{ reply.user }}
+            a.name(v-bind:href="reply.site || false", target="view_window", v-text="reply.user")
             div.tags
-              span.osname(v-if="reply.os") {{ reply.os.name }} {{ reply.os.version }}
-              span.browser(v-if="reply.browser") {{ reply.browser.name }} {{ reply.browser.version }}
-            div.date {{ timeToString(reply.datetime) }}
-            div(v-html="reply.content" v-if="reply.markdown")
-            div.raw-content(v-else) {{ reply.content }}
+              span.osname(v-if="reply.os", v-text="reply.os.name + ' ' + reply.os.version")
+              span.browser(v-if="reply.browser", v-text="reply.browser.name + ' ' + reply.browser.version")
+            div.date(v-text="timeToString(reply.datetime)")
+            div(v-html="reply.content", v-if="reply.markdown")
+            div.raw-content(v-else, v-text="reply.content")
             a.reply-to(@click="setReplyTo(reply.index)") 回复该评论
       div#reply-form.send-new
         h3(v-if="replyTo === null") 发表评论
-        h3(v-if="replyTo !== null && replies[replyTo] !== undefined") 回复给 {{ replies[replyTo].user }}
+        h3(v-if="replyTo !== null && replies[replyTo] !== undefined",
+          v-text="'回复给 ' + replies[replyTo].user")
         table.form-table: tbody
           tr
             th 姓名

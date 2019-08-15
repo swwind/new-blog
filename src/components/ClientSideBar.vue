@@ -6,8 +6,8 @@
         rect(width="28.965336" height="5.5324793" x="2.4506655" y="267.77527")
         rect(width="28.965336" height="5.5324793" x="2.4506655" y="286.82556")
       router-link(to="/"): div.avatar(v-if="avatar" v-bind:style="{ backgroundImage: `url(${avatar})` }")
-      router-link(to="/"): h1 {{ title }}
-      h2 {{ subtitle }}
+      router-link(to="/"): h1(v-text="title")
+      h2(v-text="subtitle")
     //- hr
     //- search.hide-on-mobile
     div.drawer-container(v-bind:class="{ 'active': isDrawerOpen }")

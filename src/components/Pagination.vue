@@ -5,8 +5,8 @@
         router-link(:to="prefix + '/page/1'").button &laquo;
       li(v-for="page in pages")
         template(v-if="page !== null")
-          router-link(:to="prefix + '/page/' + page" v-if="Number(current) !== page").button {{ page }}
-          a.disabled.button(v-else) {{ page }}
+          router-link(:to="prefix + '/page/' + page" v-if="Number(current) !== page").button(v-text="page")
+          a.disabled.button(v-else, v-text="page")
         template(v-else)
           span …
       li
