@@ -170,7 +170,7 @@ const gallery = require('./extensions/gallery');
 const app = express();
 
 if (config.port === 80) {
-  app.use(vhost('localhost', site));
+  app.use(vhost('new.swwind.me', site));
   app.use(vhost('gallery.swwind.me', gallery));
 } else {
   app.use(site);

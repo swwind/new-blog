@@ -1,18 +1,18 @@
 const config = {
   database: {
     address: 'mongodb://localhost:27017/',
-    db: 'newBlog'
+    db: 'blog'
   },
-  port: 1234,
+  port: 80,
   favicon: null, // local file path
   avatar: null, // http/https url
-  title: 'ntzyz\'s space',
+  title: 'swwind\'s blog',
   subtitle: '∠( ᐛ 」∠)_',
   footer: [
-    'Copyright © 2016-2019 ntzyz. All rights reversed.',
+    'Copyright © 2017-2019 swwind. All rights reversed.',
     'Except where otherwise noted, content on this blog is licensed under CC-BY 2.0.'
   ],
-  url: 'https://new.ntzyz.cn', // no slash at the end of url
+  url: 'http://new.swwind.me', // no slash at the end of url
   https: { // enabled if port === 443
     hsts: true, // listen to 80 for 302
     cert: './cert.pem',
@@ -35,12 +35,11 @@ const config = {
     enableMarkdownSupport: true
   },
   allowedOrigins: [
-    'https://example.ntzyz.cn',
-    'http://example2.ntzyz.cn'
+    'http://new.swwind.me'
   ],
   plugins: {
     gallery: {
-      enabled: true,
+      enabled: false,
       mountPoint: '/projects',
       title: 'Projects'
     },
@@ -48,7 +47,7 @@ const config = {
       enabled: true
     },
     'navigation-sound': {
-      enabled: true,
+      enabled: false,
       audioURL: '/Windows%20Navigation%20Start.aac'
     },
     'telegram-helper': {
