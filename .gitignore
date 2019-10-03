@@ -4,6 +4,8 @@ database.sql
 config.json
 /uploads
 /static
+!/static/avatar.jpg
+!/static/avatar.png
 /dist
 /gallery
 package-lock.json
