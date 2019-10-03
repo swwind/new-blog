@@ -5,9 +5,9 @@ const config = {
   },
   port: 443,
   favicon: null, // local file path
-  avatar: null, // http/https url
+  avatar: '/avatar.jpg', // http/https url
   title: 'swwind\'s blog',
-  subtitle: '精一杯僕を生きていく\n何も後悔なんてないさ',
+  subtitle: '何も後悔なんてないさ',
   footer: [
     'Copyright © 2017-2019 swwind. All rights reversed.',
     'Except where otherwise noted, content on this blog is licensed under CC-BY 2.0.'
