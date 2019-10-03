@@ -118,8 +118,7 @@ router.put('/by-slug/:slug/reply', async (req, res) => {
         replyTo: req.body.replyTo,
         githubId: req.body.githubId,
         gravatar: req.body.gravatar,
-        // FIXME: __$datetime is a temporary solution
-        datetime: req.body.__$datetime || new Date().getTime()
+        datetime: new Date().getTime()
       } } }
     );
   } catch (e) {
