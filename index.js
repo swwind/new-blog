@@ -169,8 +169,8 @@ const gallery = require('./extensions/gallery');
 
 const app = express();
 
-if (config.port === 80) {
-  app.use(vhost('new.swwind.me', site));
+if (config.port === 80 || config.port === 443) {
+  app.use(vhost('blog.swwind.me', site));
   app.use(vhost('gallery.swwind.me', gallery));
 } else {
   app.use(site);

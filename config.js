@@ -3,20 +3,20 @@ const config = {
     address: 'mongodb://localhost:27017/',
     db: 'blog'
   },
-  port: 80,
+  port: 443,
   favicon: null, // local file path
   avatar: null, // http/https url
   title: 'swwind\'s blog',
-  subtitle: '∠( ᐛ 」∠)_',
+  subtitle: '精一杯僕を生きていく\n何も後悔なんてないさ',
   footer: [
     'Copyright © 2017-2019 swwind. All rights reversed.',
     'Except where otherwise noted, content on this blog is licensed under CC-BY 2.0.'
   ],
-  url: 'http://new.swwind.me', // no slash at the end of url
+  url: 'https://blog.swwind.me', // no slash at the end of url
   https: { // enabled if port === 443
     hsts: true, // listen to 80 for 302
-    cert: './cert.pem',
-    key: './cert.key.pem'
+    cert: './fullchain.pem',
+    key: './privkey.pem'
   },
   language: 'zh-CN',
   components: {
@@ -35,7 +35,7 @@ const config = {
     enableMarkdownSupport: true
   },
   allowedOrigins: [
-    'http://new.swwind.me'
+    'http://blog.swwind.me'
   ],
   plugins: {
     gallery: {
