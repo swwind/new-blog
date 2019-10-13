@@ -58,6 +58,15 @@ site.get('/favicon.ico', (req, res) => {
   }
 });
 
+site.use('/:year/:month/:slug', (req, res, next) => {
+  if ((/^\d{4}$/).test(req.params.year) &&
+      (/^\d{2}$/).test(req.params.month)) {
+    res.redirect('/post/' + req.params.slug);
+  } else {
+    next();
+  }
+});
+
 // Factory for Vue renderer
 function createRenderer (bundle, options) {
   return createBundleRenderer(bundle, Object.assign(options, {
