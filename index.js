@@ -174,16 +174,9 @@ site.get('*', (isProd || isTest)
   }
 );
 
-const gallery = require('./extensions/gallery');
-
 const app = express();
 
-if (config.port === 80 || config.port === 443) {
-  app.use(vhost('blog.swwind.me', site));
-  app.use(vhost('gallery.swwind.me', gallery));
-} else {
-  app.use(site);
-}
+app.use(site);
 
 const option = config.port === 443 && {
   key: fs.readFileSync(path.resolve(__dirname, config.https.key), 'utf-8'),
