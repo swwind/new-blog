@@ -135,6 +135,11 @@ export default {
       if (this.$route.hash === '#reply') {
         this.$el.scrollIntoView();
       }
+
+      this.name = localStorage.getItem('reply.user') || '';
+      this.site = localStorage.getItem('reply.site') || '';
+      this.email = localStorage.getItem('reply.email') || '';
+      this.githubId = localStorage.getItem('reply.github') || '';
     });
   },
   methods: {
@@ -174,6 +179,11 @@ export default {
 
           this.busy = false;
         });
+      
+      localStorage.setItem('reply.user', this.name);
+      localStorage.setItem('reply.email', this.email);
+      localStorage.setItem('reply.site', this.site);
+      localStorage.setItem('reply.github', this.githubId);
     },
     reset () {
       Object.assign(this.$data, {
@@ -202,7 +212,7 @@ export default {
 
 div.reply {
   div.content {
-    padding: 0 1em 0 1em;
+    padding: 0 1em 1em;
   }
   table th {
     text-align: right;

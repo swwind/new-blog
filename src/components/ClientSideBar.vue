@@ -142,7 +142,7 @@ header.title {
   }
 
   svg g {
-    fill: $card_title_background_color;
+    fill: $theme_color;
     fill-opacity: 0.8;
     stroke: none;
   }

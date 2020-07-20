@@ -18,8 +18,8 @@
       tr
         td.label 常用标签：
         td
-          button.tag(v-for="tag in $store.state.tags" @click="addTag(tag.tag)", v-text="tag.tag") 
-          button.tag(@click="addTag(prompt('新标签叫啥呢？'))") +
+          button.tag.little(v-for="tag in $store.state.tags" @click="addTag(tag.tag)", v-text="tag.tag") 
+          button.tag.little(@click="addTag(prompt('新标签叫啥呢？'))") +
       tr
         td.label 封面图片：
         td: input.full(v-model="cover")
@@ -299,7 +299,7 @@ div.post-editor {
     margin-bottom: 4px;
   }
   button {
-    font-size: 12px;
+    // font-size: 12px;
     margin-right: 2px;
   }
 }

@@ -1,5 +1,4 @@
 @import './color.scss';
-@import './prism.scss';
 
 body {
   font-family: "Noto Sans CJK", "Noto Sans CJK SC", "Source Han Sans", "Source Han Sans CN", "思源黑体", "思源黑体 CN", "WenQuanYi Micro Hei", "Microsoft Yahei UI", "Microsoft Yahei", "微软雅黑", "SimHei", sans-serif;
@@ -18,25 +17,34 @@ h3 { font-size: 20px; }
 h4 { font-size: 18px; }
 h5 { font-size: 16px; }
 
+input, textarea, select {
+  background-color: $card_background_color;
+  color: $font_color;
+}
+
 button, .button {
   text-align: center;
-  padding: .4em 1.5em .4em 1.5em;
-  background: $button_color;
+  padding: .5em 1em;
+  background: $background_color;
   border: none;
-  color: white;
+  color: $font_color;
   border-radius: 2px;
   // box-shadow: 0 0 4px rgba(white, 0.5);
-  font-size: 14px;
+  font-size: 1em;
   transition: all ease 0.2s;
   cursor: pointer;
 }
 
-select {
-  height: 21.5px;
+button.little, .button.little {
+  padding: .3em .5em;
 }
 
-button:hover, .button:hover {
-  background: mix($button_color, white, 80%);
+// select {
+//   height: 21.5px;
+// }
+
+button:not(.disabled):hover, .button:not(.disabled):hover {
+  background: $background_color_mixed;
   // box-shadow: 0 0 4px grey;
 }
 
@@ -56,7 +64,7 @@ article {
 }
 
 a, a:link, a:visited, a:active, a:hover {
-  color: $link_color;
+  color: $theme_color;
   text-decoration: none;
   cursor: pointer;
   outline: none;
@@ -64,7 +72,7 @@ a, a:link, a:visited, a:active, a:hover {
 }
 
 a.button {
-  color: white;
+  color: $font_color;
 }
 
 a:not(.button):hover {
@@ -101,7 +109,7 @@ a:not(.button):hover {
 .card > .title {
   margin: 0;
   padding: 10px 4px 4px 10px;
-  color: $card_title_font_color;
+  color: $font_color;
   font-weight: 400;
   // background-color: $card_title_background_color;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
@@ -164,16 +172,16 @@ article.page-content table {
   border-collapse: collapse;
   th {
     font-weight: 600;
-    border-bottom: 2px solid $table_border_color;
+    border-bottom: 2px solid $theme_color;
   }
   td {
-    border-bottom: 1px solid $table_border_color;
+    border-bottom: 1px solid $theme_color;
   }
   th, td {
     padding: 4px 12px;
   }
   tr:hover {
-    background-color: $table_row_hover_color;
+    background-color: $theme_color;
   }
 }
 
@@ -186,21 +194,21 @@ article.page-content table {
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: $card_background_color;
+  background: $background_color_mixed;
   border: 0px none #fff;
   transition: all ease 0.1s;
   cursor: pointer;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: darkgray;
-}
-::-webkit-scrollbar-thumb:active {
-  background: gray;
-}
+// ::-webkit-scrollbar-thumb:hover {
+//   background: darkgray;
+// }
+// ::-webkit-scrollbar-thumb:active {
+//   background: gray;
+// }
 
 div.title-card {
-  color: $card_title_background_color;
-  border-left: 5px solid $card_title_background_color;
+  color: $theme_color;
+  border-left: 5px solid $theme_color;
   font-weight: 600;
   padding: 1em;
   font-size: 1.5rem;
@@ -215,10 +223,10 @@ div.title-card {
 article {
 
   .hide {
-    color: white;
+    color: $card_background_color;
 
     a {
-      color: white !important;
+      color: $card_background_color !important;
     }
   }
   .truth {

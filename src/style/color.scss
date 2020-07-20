@@ -1,18 +1,44 @@
 /* Customize your colors here. */
 
-$background_color: #181c27;
-$font_color: #ffffff;
-$font_light_color: #ffffffa8;
-$button_color: #00695c;
-$card_title_background_color: #3499ff;
-$card_title_font_color: #ffffff;
-$card_background_color: #252d38;
-$card_font_color: #ffffff;
-$link_color: #3499ff;
-$table_border_color: mix(#3499ff, white, 70%);
-$table_row_hover_color: mix(#3499ff, white, 4%);
-$loading_indicator_color: #888888;
-$input_border_color: #00695c;
-$avatar_fallback_background_color: #00695c;
-$avatar_fallback_text_color: #ffffff;
-$progress_bar_color: #00695c;
+:root {
+  --background_color: #ececec;
+  --background_color_mixed: #bdbdbd;
+  --background_color_light_mixed: #e7e7e7;
+  --font_color: #37475b;
+  --font_light_color: #909faf;
+  --theme_color: #3273dc;
+  --card_background_color: #ffffff;
+  --avatar_fallback_background_color: #00695c;
+  --avatar_fallback_text_color: #ffffff;
+  --progress_bar_color: #00695c;
+}
+
+@import './prism.light.scss';
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background_color: #181c27;
+    --background_color_mixed: #464952;
+    --background_color_light_mixed: #3d4149;
+    --font_color: #ffffff;
+    --font_light_color: #ffffffa8;
+    --theme_color: #3499ff;
+    --card_background_color: #252d38;
+    --avatar_fallback_background_color: #00695c;
+    --avatar_fallback_text_color: #ffffff;
+    --progress_bar_color: #00695c;
+  }
+
+  @import './prism.dark.scss';
+}
+
+$background_color: var(--background_color);
+$background_color_mixed: var(--background_color_mixed);
+$background_color_light_mixed: var(--background_color_light_mixed);
+$font_color: var(--font_color);
+$font_light_color: var(--font_light_color);
+$theme_color: var(--theme_color);
+$card_background_color: var(--card_background_color);
+$avatar_fallback_background_color: var(--avatar_fallback_background_color);
+$avatar_fallback_text_color: var(--avatar_fallback_text_color);
+$progress_bar_color: var(--progress_bar_color);

@@ -54,7 +54,7 @@ export default {
   }
 
   li:hover {
-    background-color: mix($background_color, lightgrey, 80%);
+    background-color: $background_color_light_mixed;
   }
 }
 

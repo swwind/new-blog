@@ -2,8 +2,12 @@
 
 table.form-table {
   width: 100%;
-
   border-spacing: 10px;
+
+  th, td.label {
+    padding-top: .5em;
+  }
+
   td.label {
     width: 90px;
     text-align: right;
@@ -18,15 +22,20 @@ table.form-table {
     outline: none;
   }
 
-  input {
-    padding: 2px;
+  input, select, textarea {
+    padding: .5em;
   }
 
   input, textarea {
-    border: none;
-    border-radius: 0;
-    border: 1px solid #888888;
-    background: rgba(0, 0, 0, 0);
+    border: 2px solid $background_color;
+    border-radius: 5px;
+    background: $background_color;
+    transition: background-color .2s;
+    font-family: monospace;
+  }
+
+  input:focus, textarea:focus {
+    border-color: $font_light_color;
   }
 
   textarea.content {

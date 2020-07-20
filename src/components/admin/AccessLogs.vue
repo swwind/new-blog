@@ -54,7 +54,6 @@ div.realtime-access-logs {
       margin: 0;
       padding: 1em 0 1em 0;
       overflow: visible;
-      background-color: white;
     }
     span {
       display: block;

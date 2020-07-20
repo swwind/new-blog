@@ -122,7 +122,7 @@ export default {
     }
 
     header.title h3 {
-      color: $card_title_background_color;
+      color: $theme_color;
       margin: 0;
       text-align: left;
       font-weight: 600;

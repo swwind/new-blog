@@ -9,4 +9,7 @@ Modified for self use.
 - [x] ~~Add my special gallery~~ Removed
 - [x] Add some funny class
 - [x] Dark mode
+- [x] Save your name and email in localStorage
+- [x] Automatic swith from light mode and dark mode
 - [ ] Search
+- [ ] A header

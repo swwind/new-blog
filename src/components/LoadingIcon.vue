@@ -84,6 +84,6 @@ div.wrapper {
   }
 }
 .sk-circle .sk-child:before {
-  background-color: $loading_indicator_color;
+  background-color: #888888;
 }
 </style>
