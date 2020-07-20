@@ -8,4 +8,5 @@ Modified for self use.
 - [x] Add katex
 - [x] ~~Add my special gallery~~ Removed
 - [x] Add some funny class
+- [x] Dark mode
 - [ ] Search

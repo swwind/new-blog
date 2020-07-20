@@ -174,7 +174,7 @@ footer {
   top: 0;
   left: 0;
   background-color: $progress_bar_color;
-  box-shadow: 0 0 5px $progress_bar_color;
+  // box-shadow: 0 0 5px $progress_bar_color;
   height: 2px;
   // transition: all ease .3s;
   opacity: 0;
@@ -230,7 +230,7 @@ footer {
   }
 
   #progress-bar {
-    box-shadow: 0 0 10px $progress_bar_color;
+    // box-shadow: 0 0 10px $progress_bar_color;
     height: 4px;
   }
 }

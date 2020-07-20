@@ -317,7 +317,7 @@ div.reply {
     }
     div.date, a.name, div.tags {
       font-size: 0.8em;
-      color: grey;
+      color: $font_light_color;
     }
     div.tags {
       display: inline-block;
@@ -326,7 +326,6 @@ div.reply {
         padding: 2px 5px;
         border-radius: 2px;
         margin-left: 10px;
-        background-color: rgba(0, 0, 0, .05);
       }
     }
   }

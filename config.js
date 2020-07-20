@@ -9,7 +9,7 @@ const config = {
   title: 'swwind\'s blog',
   subtitle: '何も後悔なんてないさ',
   footer: [
-    'Copyright © 2017-2019 swwind. All rights reversed.',
+    'Copyright © 2017-2020 swwind. All rights reversed.',
     'Except where otherwise noted, content on this blog is licensed under CC-BY 2.0.'
   ],
   url: 'https://blog.swwind.me', // no slash at the end of url

@@ -129,6 +129,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../style/color.scss';
+
 div.post-view {
   > div.card {
     padding: 0em;
@@ -176,7 +178,7 @@ div.post-view {
   }
 
   header:not(.image-overlay) div.post-meta > span {
-    color: #333;
+    color: $font_light_color;
   }
 
   p.indent {

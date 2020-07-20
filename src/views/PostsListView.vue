@@ -104,7 +104,7 @@ div.posts-list {
 
   .list-item {
     padding: 20px;
-    background-color: white;
+    background-color: $card_background_color;
     border-radius: 2px;
   }
 
@@ -141,7 +141,7 @@ div.posts-list {
   }
 
   header:not(.image-overlay) div.post-meta > span {
-    color: #333;
+    color: $font_light_color;
   }
 
   footer {

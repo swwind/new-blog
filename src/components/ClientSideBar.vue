@@ -188,7 +188,7 @@ header.title {
       background-size: cover;
       border-radius: 50px;
       // border: 2px solid red;
-      box-shadow: 0 0 20px rgba(black, 0.5);
+      // box-shadow: 0 0 20px rgba(black, 0.5);
     }
   }
 }

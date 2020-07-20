@@ -85,6 +85,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../style/color.scss';
+
 nav.pagination {
   $size: 28px;
   position: relative;
@@ -110,8 +112,8 @@ nav.pagination {
     margin-left: 0.3em;
     cursor: pointer;
     a:not(.disabled) {
-      background-color: rgb(245, 245, 245);
-      color: black;
+      background-color: $card_background_color;
+      color: $font_color;
       box-shadow: none;
     }
     a {

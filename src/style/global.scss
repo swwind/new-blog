@@ -25,7 +25,7 @@ button, .button {
   border: none;
   color: white;
   border-radius: 2px;
-  box-shadow: 0 0 4px rgba(white, 0.5);
+  // box-shadow: 0 0 4px rgba(white, 0.5);
   font-size: 14px;
   transition: all ease 0.2s;
   cursor: pointer;
@@ -37,7 +37,7 @@ select {
 
 button:hover, .button:hover {
   background: mix($button_color, white, 80%);
-  box-shadow: 0 0 4px grey;
+  // box-shadow: 0 0 4px grey;
 }
 
 button:focus, .button:focus {
@@ -68,7 +68,7 @@ a.button {
 }
 
 a:not(.button):hover {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $font_color;
 }
 
 .forward-enter-active {
@@ -88,20 +88,22 @@ a:not(.button):hover {
 
 .card {
   background-color: $card_background_color;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   margin-top: 15px;
   margin-bottom: 15px;
   padding-top: 0px;
   padding-bottom: 1px;
+  border-radius: 5px;
 }
 
 .card > .title {
   margin: 0;
-  padding: 4px 4px 4px 10px;
+  padding: 10px 4px 4px 10px;
   color: $card_title_font_color;
   font-weight: 400;
-  background-color: $card_title_background_color;
+  // background-color: $card_title_background_color;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -115,7 +117,7 @@ a:not(.button):hover {
 /** code block **/
 pre {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  background: rgb(245, 245, 245);
+  // background: rgb(245, 245, 245);
   font-size: 0.8em;
   line-height: 1.2em;
   padding: 1em 0em 1em 1em;
@@ -125,7 +127,7 @@ pre {
   counter-reset: line;
   
   code {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 }
 
@@ -134,7 +136,7 @@ code {
   border-radius: 0.2em;
   font-size: 0.9em;
   padding: 0.1em 0.2em;
-  background: rgb(245, 245, 245);
+  // background: rgb(245, 245, 245);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
@@ -184,7 +186,7 @@ article.page-content table {
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: lightgrey;
+  background: $card_background_color;
   border: 0px none #fff;
   transition: all ease 0.1s;
   cursor: pointer;
@@ -220,17 +222,17 @@ article {
     }
   }
   .truth {
-    background-color: #666;
-    color: #666;
+    background-color: $background_color;
+    color: $background_color;
 
     a {
-      color: #666 !important;
+      color: $background_color !important;
       transition: all 0s;
       border: none;
     }
 
     &:hover {
-      color: #ccc;
+      color: $font_light_color;
 
       a {
         color: #7eabd2 !important;
