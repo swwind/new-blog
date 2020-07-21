@@ -207,8 +207,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/color.scss';
-@import '../style/form-table.scss';
+// @import '../style/color.scss';
+// @import '../style/form-table.scss';
 
 div.reply {
   div.content {
@@ -303,8 +303,8 @@ div.reply {
         width: 40px;
         text-align: center;
         font-size: 20px;
-        background-color: $avatar_fallback_background_color;
-        color: $avatar_fallback_text_color;
+        background-color: var(--avatar_fallback_background_color);
+        color: var(--avatar_fallback_text_color);
         user-select: none;
       }
     }
@@ -327,7 +327,7 @@ div.reply {
     }
     div.date, a.name, div.tags {
       font-size: 0.8em;
-      color: $font_light_color;
+      color: var(--font_light_color);
     }
     div.tags {
       display: inline-block;

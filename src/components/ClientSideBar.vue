@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/color.scss';
+// @import '../style/color.scss';
 
 div.side-bar {
   /* Mobile devices */
@@ -142,7 +142,7 @@ header.title {
   }
 
   svg g {
-    fill: $theme_color;
+    fill: var(--theme_color);
     fill-opacity: 0.8;
     stroke: none;
   }
@@ -151,10 +151,11 @@ header.title {
   @media screen and (max-width: 800px) {
     position: fixed;
     width: 100vw;
-    background: rgba(white, 0.9);
+    background-color: var(--card_background_color);
+    border-radius: 0;
 
     backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    // -webkit-backdrop-filter: blur(2px);
 
     h1 {
       margin: 0;

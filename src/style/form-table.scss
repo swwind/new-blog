@@ -1,4 +1,4 @@
-@import './color.scss';
+// @import './color.scss';
 
 table.form-table {
   width: 100%;
@@ -27,15 +27,15 @@ table.form-table {
   }
 
   input, textarea {
-    border: 2px solid $background_color;
+    border: 2px solid var(--background_color);
     border-radius: 5px;
-    background: $background_color;
+    background: var(--background_color);
     transition: background-color .2s;
     font-family: monospace;
   }
 
   input:focus, textarea:focus {
-    border-color: $font_light_color;
+    border-color: var(--font_light_color);
   }
 
   textarea.content {

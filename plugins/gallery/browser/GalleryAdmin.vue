@@ -158,7 +158,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../src/style/form-table.scss';
+// @import '../../../src/style/form-table.scss';
 
 .gallery-manage {
   .content {

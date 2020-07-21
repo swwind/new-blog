@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/color.scss';
+// @import '../style/color.scss';
 
 div.wrapper {
   width: 100%;

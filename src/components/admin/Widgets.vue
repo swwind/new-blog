@@ -109,7 +109,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../style/form-table.scss';
+// @import '../../style/form-table.scss';
 
 div.widgets-manage {
   .container {

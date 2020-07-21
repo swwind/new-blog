@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/color.scss';
+// @import '../style/color.scss';
 
 div.posts-list {
 
@@ -104,7 +104,7 @@ div.posts-list {
 
   .list-item {
     padding: 20px;
-    background-color: $card_background_color;
+    background-color: var(--card_background_color);
     border-radius: 2px;
   }
 
@@ -141,7 +141,7 @@ div.posts-list {
   }
 
   header:not(.image-overlay) div.post-meta > span {
-    color: $font_light_color;
+    color: var(--font_light_color);
   }
 
   footer {

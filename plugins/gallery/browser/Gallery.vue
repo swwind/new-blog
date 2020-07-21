@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/style/color.scss';
+// @import '../../../src/style/color.scss';
 
 .gallery {
   $height: 220px;
@@ -122,7 +122,7 @@ export default {
     }
 
     header.title h3 {
-      color: $theme_color;
+      color: var(--theme_color);
       margin: 0;
       text-align: left;
       font-weight: 600;

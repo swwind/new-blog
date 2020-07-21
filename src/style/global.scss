@@ -1,4 +1,5 @@
 @import './color.scss';
+@import './form-table.scss';
 
 body {
   font-family: "Noto Sans CJK", "Noto Sans CJK SC", "Source Han Sans", "Source Han Sans CN", "思源黑体", "思源黑体 CN", "WenQuanYi Micro Hei", "Microsoft Yahei UI", "Microsoft Yahei", "微软雅黑", "SimHei", sans-serif;
@@ -18,16 +19,16 @@ h4 { font-size: 18px; }
 h5 { font-size: 16px; }
 
 input, textarea, select {
-  background-color: $card_background_color;
-  color: $font_color;
+  background-color: var(--card_background_color);
+  color: var(--font_color);
 }
 
 button, .button {
   text-align: center;
   padding: .5em 1em;
-  background: $background_color;
+  background: var(--background_color);
   border: none;
-  color: $font_color;
+  color: var(--font_color);
   border-radius: 2px;
   // box-shadow: 0 0 4px rgba(white, 0.5);
   font-size: 1em;
@@ -44,7 +45,7 @@ button.little, .button.little {
 // }
 
 button:not(.disabled):hover, .button:not(.disabled):hover {
-  background: $background_color_mixed;
+  background: var(--background_color_mixed);
   // box-shadow: 0 0 4px grey;
 }
 
@@ -64,7 +65,7 @@ article {
 }
 
 a, a:link, a:visited, a:active, a:hover {
-  color: $theme_color;
+  color: var(--theme_color);
   text-decoration: none;
   cursor: pointer;
   outline: none;
@@ -72,11 +73,11 @@ a, a:link, a:visited, a:active, a:hover {
 }
 
 a.button {
-  color: $font_color;
+  color: var(--font_color);
 }
 
 a:not(.button):hover {
-  border-bottom: 1px solid $font_color;
+  border-bottom: 1px solid var(--font_color);
 }
 
 .forward-enter-active {
@@ -95,8 +96,8 @@ a:not(.button):hover {
 }
 
 .card {
-  background-color: $card_background_color;
-  // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  background-color: var(--card_background_color);
+  box-shadow: 0 0 10px var(--background_color_mixed);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   margin-top: 15px;
@@ -109,9 +110,9 @@ a:not(.button):hover {
 .card > .title {
   margin: 0;
   padding: 10px 4px 4px 10px;
-  color: $font_color;
+  color: var(--font_color);
   font-weight: 400;
-  // background-color: $card_title_background_color;
+  // background-color: var(--card_title_background_color);
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -119,6 +120,13 @@ a:not(.button):hover {
   .card {
     box-shadow: none;
     margin: 0;
+    border-radius: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    box-shadow: none;
   }
 }
 
@@ -172,16 +180,16 @@ article.page-content table {
   border-collapse: collapse;
   th {
     font-weight: 600;
-    border-bottom: 2px solid $theme_color;
+    border-bottom: 2px solid var(--theme_color);
   }
   td {
-    border-bottom: 1px solid $theme_color;
+    border-bottom: 1px solid var(--theme_color);
   }
   th, td {
     padding: 4px 12px;
   }
   tr:hover {
-    background-color: $theme_color;
+    background-color: var(--theme_color);
   }
 }
 
@@ -194,7 +202,7 @@ article.page-content table {
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: $background_color_mixed;
+  background: var(--background_color_mixed);
   border: 0px none #fff;
   transition: all ease 0.1s;
   cursor: pointer;
@@ -207,8 +215,8 @@ article.page-content table {
 // }
 
 div.title-card {
-  color: $theme_color;
-  border-left: 5px solid $theme_color;
+  color: var(--theme_color);
+  border-left: 5px solid var(--theme_color);
   font-weight: 600;
   padding: 1em;
   font-size: 1.5rem;
@@ -223,24 +231,24 @@ div.title-card {
 article {
 
   .hide {
-    color: $card_background_color;
+    color: var(--card_background_color);
 
     a {
-      color: $card_background_color !important;
+      color: var(--card_background_color) !important;
     }
   }
   .truth {
-    background-color: $background_color;
-    color: $background_color;
+    background-color: var(--background_color);
+    color: var(--background_color);
 
     a {
-      color: $background_color !important;
+      color: var(--background_color) !important;
       transition: all 0s;
       border: none;
     }
 
     &:hover {
-      color: $font_light_color;
+      color: var(--font_light_color);
 
       a {
         color: #7eabd2 !important;

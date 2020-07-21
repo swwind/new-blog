@@ -285,7 +285,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../style/form-table.scss';
+// @import '../../style/form-table.scss';
 
 div.post-editor {
   .container {

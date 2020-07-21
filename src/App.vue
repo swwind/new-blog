@@ -145,11 +145,11 @@ export default {
 
 body {
   margin: 0;
-  color: $font_color;
+  color: var(--font_color);
   min-height: 100vh;
   height: 100%;
   overflow-y: scroll;
-  background-color: $background_color;
+  background-color: var(--background_color);
   font-family: Microsoft Yahei UI;
 }
 
@@ -163,7 +163,7 @@ footer {
   font-size: 12px;
   color: grey;
   text-align: center;
-  padding: 0 0 14px 0;
+  padding: 14px 0;
   // border-top: 2px solid lightgrey;
   // margin: 0 36px;
 }
@@ -173,8 +173,8 @@ footer {
   z-index: 99999;
   top: 0;
   left: 0;
-  background-color: $progress_bar_color;
-  // box-shadow: 0 0 5px $progress_bar_color;
+  background-color: var(--progress_bar_color);
+  // box-shadow: 0 0 5px var(--progress_bar_color);
   height: 2px;
   // transition: all ease .3s;
   opacity: 0;
@@ -230,7 +230,7 @@ footer {
   }
 
   #progress-bar {
-    // box-shadow: 0 0 10px $progress_bar_color;
+    // box-shadow: 0 0 10px var(--progress_bar_color);
     height: 4px;
   }
 }

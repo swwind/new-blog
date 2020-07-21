@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../style/color.scss';
+// @import '../style/color.scss';
 
 div.post-view {
   > div.card {
@@ -178,7 +178,7 @@ div.post-view {
   }
 
   header:not(.image-overlay) div.post-meta > span {
-    color: $font_light_color;
+    color: var(--font_light_color);
   }
 
   p.indent {
