@@ -3,7 +3,7 @@ const config = {
     address: 'mongodb://localhost:27017/',
     db: 'blog'
   },
-  port: 3000,
+  port: 443,
   favicon: null, // local file path
   avatar: '/avatar.jpg', // http/https url
   title: 'swwind\'s blog',
@@ -12,7 +12,7 @@ const config = {
     'Copyright © 2017-2020 swwind. All rights reversed.',
     'Except where otherwise noted, content on this blog is licensed under CC-BY 2.0.'
   ],
-  url: 'http://localhost:3000', // no slash at the end of url
+  url: 'https://blog.swwind.me', // no slash at the end of url
   https: { // enabled if port === 443
     hsts: true, // listen to 80 for 302
     cert: './fullchain.pem',

@@ -13,6 +13,11 @@ const serve = (p, cache) => express.static(path.resolve(__dirname, p), {
   maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 });
 
+if (!isProd) {
+  config.port = 3000;
+  config.url = 'http://localhost:3000';
+}
+
 const site = express();
 const pluginRouter = express.Router();
 
@@ -177,6 +182,8 @@ site.get('*', (isProd || isTest)
 const app = express();
 
 app.use(site);
+
+console.log(isProd, isTest);
 
 const option = config.port === 443 && {
   key: fs.readFileSync(path.resolve(__dirname, config.https.key), 'utf-8'),
