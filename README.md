@@ -11,5 +11,8 @@ Modified for self use.
 - [x] Dark mode
 - [x] Save your name and email in localStorage
 - [x] Automatic swith from light mode and dark mode
+- [x] Add Google Analytics
+- [ ] Add GMF support
+- [ ] Add dark/light switch button
 - [ ] Search
 - [ ] A header

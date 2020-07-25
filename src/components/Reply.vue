@@ -29,11 +29,11 @@
             th 站点
             td: input.full(v-model="site", placeholder="选填")
           tr
-            th 电子邮件
+            th 电子邮箱
             td: input.full(v-model="email", placeholder="选填，不会公开，用于显示 gravatar 头像")
           tr
             th GitHub ID
-            td: input.full(v-model="githubId", placeholder="选填，如果没有 gravatar 则使用 github 头像代替")
+            td: input.full(v-model="githubId", placeholder="选填，如果没有 gravatar 头像可以使用 github 头像代替")
           tr
             th 评论
             td: textarea.content(v-model="content", placeholder="必填，可以使用 Markdown 语法")
@@ -127,7 +127,7 @@ export default {
   },
   watch: {
     replies () {
-      this.reset();
+      this.content = '';
     }
   },
   mounted () {
@@ -341,8 +341,8 @@ div.reply {
   }
 
   button {
-    font-size: 12px;
-    margin-right: 5px;
+    // font-size: 12px;
+    margin-right: 10px;
   }
 }
 </style>

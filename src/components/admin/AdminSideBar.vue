@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../style/color.scss';
+// @import '../../style/color.scss';
 
 .admin-side-bar {
   ul {
