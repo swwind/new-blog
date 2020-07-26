@@ -52,6 +52,10 @@ export default {
       if (typeof document !== 'undefined') {
         document.querySelector('#left-wrapper').setAttribute('style', '');
       }
+      if (ga) {
+        ga('set', 'page', window.location.pathname);
+        ga('send', 'pageview');
+      }
     },
     busy: function (val) {
       if (val) {
