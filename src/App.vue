@@ -123,6 +123,10 @@ export default {
 
       this.lastScrollY = window.scrollY;
     });
+
+    const style = document.createElement('style');
+    style.innerText = `.hide-day.day-${(new Date).getDay()}{display: inline-block !important;}`;
+    document.head.appendChild(style);
   },
   methods: {
     renderKatex () {
