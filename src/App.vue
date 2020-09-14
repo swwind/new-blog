@@ -158,7 +158,6 @@ body {
   height: 100%;
   overflow-y: scroll;
   background-color: var(--background_color);
-  font-family: Microsoft Yahei UI;
 }
 
 #app {
